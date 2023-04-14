@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Initialized Final project OOVP">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Creating Utility Method, and creating form or grid-style layout with SpringLayout">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafpassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +20,13 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -30,18 +36,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -50,7 +56,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1681274318183</updated>
-      <workItem from="1681274319219" duration="1528000" />
+      <workItem from="1681274319219" duration="2174000" />
+      <workItem from="1681298916692" duration="4233000" />
+      <workItem from="1681347248057" duration="2768000" />
+      <workItem from="1681485389120" duration="370000" />
+      <workItem from="1681494250401" duration="775000" />
+      <workItem from="1681495036170" duration="781000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -59,7 +70,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681274473224</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Adding FlatLaf UI Components">
+      <created>1681277738919</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681277738919</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Creating Utility Method, and creating form or grid-style layout with SpringLayout">
+      <created>1681349059671</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1681349059671</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -67,6 +92,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initialized Final project OOVP" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initialized Final project OOVP" />
+    <MESSAGE value="Adding FlatLaf UI Components" />
+    <MESSAGE value="Creating Utility Method, and creating form or grid-style layout with SpringLayout" />
+    <option name="LAST_COMMIT_MESSAGE" value="Creating Utility Method, and creating form or grid-style layout with SpringLayout" />
   </component>
 </project>
