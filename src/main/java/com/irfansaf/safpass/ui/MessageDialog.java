@@ -143,14 +143,44 @@ public final class MessageDialog extends JDialog implements ActionListener {
         return ret;
     }
 
+    /**
+     * Shows a warning message.
+     *
+     * @param parent parent component
+     * @param message dialog message
+     */
     public static void showWarningMessage(final Component parent, final String message) {
         showMessageDialog(parent, message, "Warning", getIcon("dialog_warning"));
     }
 
+    /**
+     * Shows an error message.
+     *
+     * @param parent parent component
+     * @param message dialog message
+     */
     public static void showErrorMessage(final Component parent, final String message) {
         showMessageDialog(parent, message, "Error", getIcon("dialog_error"))
     }
 
+    /**
+     * Shows an information message.
+     *
+     * @param parent parent component
+     * @param message dialog message
+     */
+    public static void showInformationMessage(final Component parent, final String message) {
+        showMessageDialog(parent, message, "Information", getIcon("dialog_info"));
+    }
+
+    /**
+     * Shows a question dialog
+     *
+     * @param parent parent component
+     * @param message dialog message
+     * @param optionType question type
+     * @return selected option
+     */
     public static int showQuestionMessage(final Component parent, final String message, final int optionType) {
         return showMessageDialog(parent, message, "Confirmation", getIcon("dialog_question"), optionType);
     }
