@@ -47,7 +47,16 @@ public final class MessageDialog extends JDialog implements ActionListener {
             }
         } catch (Exception e) {
             LOG.log(Level.WARNING, String.format("An error occured during reading resource [%s]", name), e);
+        } finally {
+            try {
+                if (bufferedReader != null) {
+                    bufferedReader.close();
+                }
+            } catch (IOException e) {
+                LOG.log(Level.WARNING, String.format("An error occured during closing reader for resource [%s]", name), e);
+            }
         }
+        return builder.toString();
     }
 
 
