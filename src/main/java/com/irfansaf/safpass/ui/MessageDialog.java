@@ -33,6 +33,16 @@ public final class MessageDialog extends JDialog implements ActionListener {
 
     private int selectedOption;
 
+    private MessageDialog(final Dialog parent, final Object message, final String title, ImageIcon icon, int optionType) {
+        super(parent);
+        initializeDialog(parent, message, title, icon, optionType);
+    }
+
+    private MessageDialog(final Frame parent, final Object message, final String title, ImageIcon icon, int optionType) {
+        super(parent);
+        initializeDialog(parent, message, title, icon, optionType);
+    }
+
     private void initializeDialog (final Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
         setModal(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
