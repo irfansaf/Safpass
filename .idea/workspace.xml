@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Creating showMessageDialog function">
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="create constructor for Frame and Dialog">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" afterDir="false" />
     </list>
@@ -68,7 +68,7 @@
       <workItem from="1681495036170" duration="2227000" />
       <workItem from="1681532222117" duration="1032000" />
       <workItem from="1681533262310" duration="1193000" />
-      <workItem from="1681534501310" duration="2724000" />
+      <workItem from="1681534501310" duration="3192000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -133,7 +133,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681538258293</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="create constructor for Frame and Dialog">
+      <created>1681538464711</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1681538464711</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,6 +156,7 @@
     <MESSAGE value="initializeDialog and createButton" />
     <MESSAGE value="fix main panel area" />
     <MESSAGE value="Creating showMessageDialog function" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating showMessageDialog function" />
+    <MESSAGE value="create constructor for Frame and Dialog" />
+    <option name="LAST_COMMIT_MESSAGE" value="create constructor for Frame and Dialog" />
   </component>
 </project>
