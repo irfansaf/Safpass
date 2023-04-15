@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Creating Utility Method, and creating form or grid-style layout with SpringLayout">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafpassFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="fix main panel area">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,18 +34,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Problems",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,7 +65,10 @@
       <workItem from="1681347248057" duration="2768000" />
       <workItem from="1681485389120" duration="370000" />
       <workItem from="1681494250401" duration="775000" />
-      <workItem from="1681495036170" duration="781000" />
+      <workItem from="1681495036170" duration="2227000" />
+      <workItem from="1681532222117" duration="1032000" />
+      <workItem from="1681533262310" duration="1193000" />
+      <workItem from="1681534501310" duration="2510000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -84,7 +91,42 @@
       <option name="project" value="LOCAL" />
       <updated>1681349059671</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Working on Message Dialog">
+      <created>1681495853618</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681495853619</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Resource as String">
+      <created>1681532365124</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1681532365124</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Image Icon and GetIcon">
+      <created>1681533418996</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1681533418996</updated>
+    </task>
+    <task id="LOCAL-00007" summary="initializeDialog and createButton">
+      <created>1681534923532</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1681534923532</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix main panel area">
+      <created>1681537642687</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1681537642687</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -94,6 +136,11 @@
     <MESSAGE value="Initialized Final project OOVP" />
     <MESSAGE value="Adding FlatLaf UI Components" />
     <MESSAGE value="Creating Utility Method, and creating form or grid-style layout with SpringLayout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Creating Utility Method, and creating form or grid-style layout with SpringLayout" />
+    <MESSAGE value="Working on Message Dialog" />
+    <MESSAGE value="Resource as String" />
+    <MESSAGE value="Image Icon and GetIcon" />
+    <MESSAGE value="initializeDialog and createButton" />
+    <MESSAGE value="fix main panel area" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix main panel area" />
   </component>
 </project>

@@ -105,6 +105,34 @@ public final class MessageDialog extends JDialog implements ActionListener {
         return button;
     }
 
+    private int getSelectedOption() {
+        return this.selectedOption;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        this.selectedOption = Integer.parseInt(event.getActionCommand());
+        dispose();
+    }
+
+    private static void showMessageDialog(final Component parent, final Object message, final String title, ImageIcon icon) {
+        showMessageDialog(parent, message, title, icon, DEFAULT_OPTION);
+    }
+
+    private static int showMessageDialog(final  Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
+        int ret = CLOSED_OPTION;
+        MessageDialog dialog = null;
+        if (parent instanceof Frame) {
+            dialog = new MessageDialog((Frame) parent, message, title, icon, optionType);
+        } else if (parent instanceof Dialog) {
+            dialog = new MessageDialog((Dialog) parent, message, title, icon, optionType);
+        }
+        if (dialog != null) {
+            ret = dialog.getSelectedOption();
+        }
+        return ret;
+    }
+
     /**
      * Returns an image resource.
      *
