@@ -185,6 +185,13 @@ public final class MessageDialog extends JDialog implements ActionListener {
         return showMessageDialog(parent, message, "Confirmation", getIcon("dialog_question"), optionType);
     }
 
+    public static char[] showPasswordDialog(final Component parent, final boolean confirm) {
+        JPanel panel = new JPanel();
+        panel.add(new JLabel("Password:"));
+        final JPasswordField password = TextComponentFactory.newPasswordField();
+
+    }
+
     /**
      * Returns an image resource.
      *
