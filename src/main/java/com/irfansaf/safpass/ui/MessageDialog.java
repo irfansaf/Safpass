@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import com.irfansaf.safpass.util.SpringUtilities;
@@ -62,6 +63,38 @@ public final class MessageDialog extends JDialog implements ActionListener {
                 break;
         }
         getRootPane().setDefaultButton(defaultButton);
+
+        JPanel mainPanel = new JPanel(new BorderLayout(5, 0));
+
+        float widthMultiplier;
+        JPanel messagePanel = new JPanel(new BorderLayout());
+        if (message instanceof JScrollPane) {
+            widthMultiplier = 1.0f;
+            messagePanel.add((Component) message, BorderLayout.CENTER);
+        } else if (message instanceof Component) {
+            widthMultiplier = 1.5f;
+            messagePanel.add((Component) message, BorderLayout.NORTH);
+        } else {
+            widthMultiplier = 1.0f;
+            messagePanel.setBorder(new EmptyBorder(10, 0, 10, 10));
+            messagePanel.add(new JLabel("<html>" + String.valueOf(message)
+                    .replaceAll("\\n", "<br />") + "</html>"), BorderLayout.CENTER);
+        }
+        mainPanel.add(messagePanel, BorderLayout.CENTER);
+
+        if (icon != null) {
+            JLabel image = new JLabel(icon);
+            image.setVerticalAlignment(SwingConstants.TOP);
+            image.setBorder(new EmptyBorder(10, 10, 0, 10));
+            mainPanel.add(image, BorderLayout.WEST);
+        }
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+
+        getContentPane().add(mainPanel);
+        setResizable(false);
+        pack();
+        setSize((int) (getWidth() * widthMultiplier), getHeight());
+        setVisible(true);
     }
 
     private JButton createButton(String name, int option ,ImageIcon icon) {
