@@ -32,6 +32,46 @@ public final class MessageDialog extends JDialog implements ActionListener {
 
     private int selectedOption;
 
+    private void initializeDialog (final Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
+        setModal(true);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.selectedOption = CLOSED_OPTION;
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+        JButton defaultButton;
+        switch (optionType) {
+            case YES_NO_OPTION :
+                defaultButton = createButton("Yes", YES_OPTION, getIcon("accept"));
+                buttonPanel.add(defaultButton);
+                buttonPanel.add(createButton("No", NO_OPTION, getIcon("close")));
+                break;
+            case YES_NO_CANCEL_OPTION:
+                defaultButton = createButton("Yes", YES_OPTION, getIcon("accept"));
+                buttonPanel.add(defaultButton);
+                buttonPanel.add(createButton("No", NO_OPTION, getIcon("close")));
+                buttonPanel.add(createButton("Cancel", CANCEL_OPTION, getIcon("cancel")));
+                break;
+            case OK_CANCEL_OPTION:
+                defaultButton = createButton("OK", OK_OPTION, getIcon("accept"));
+                buttonPanel.add(defaultButton);
+                buttonPanel.add(createButton("Cancel", CANCEL_OPTION, getIcon("cancel")));
+                break;
+            default:
+                defaultButton = createButton("OK", OK_OPTION, getIcon("accept"));
+                buttonPanel.add(defaultButton);
+                break;
+        }
+        getRootPane().setDefaultButton(defaultButton);
+    }
+
+    private JButton createButton(String name, int option ,ImageIcon icon) {
+        JButton button = new JButton(name, icon);
+        button.setMnemonic(name.charAt(0));
+        button.setActionCommand(String.valueOf(option));
+        button.addActionListener(this);
+        return button;
+    }
+
     /**
      * Returns an image resource.
      *
