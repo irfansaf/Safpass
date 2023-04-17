@@ -1,5 +1,9 @@
 plugins {
     id 'java'
+    id 'distribution'
+    id 'org.gradle.crypto.checksum' version '1.4.0'
+    id 'checkstyle'
+    id 'jacoco'
 }
 
 group 'com.irfansaf.safpass'
@@ -15,6 +19,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.14.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    testImplementation 'junit:junit:4.13.1'
 }
 
 test {
