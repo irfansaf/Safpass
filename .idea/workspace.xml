@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="fix TextComponent by Creating 2 separate">
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding newTextArea">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/MessageDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/TextComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/TextComponentFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +71,7 @@
       <workItem from="1681533262310" duration="1193000" />
       <workItem from="1681534501310" duration="6668000" />
       <workItem from="1681563434432" duration="5090000" />
-      <workItem from="1681707409236" duration="394000" />
+      <workItem from="1681707409236" duration="1296000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -170,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681569705079</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Adding newTextArea">
+      <created>1681707831111</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1681707831111</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -191,6 +199,7 @@
     <MESSAGE value="make inline documentation" />
     <MESSAGE value="Adding Text Component and the utils for working on it" />
     <MESSAGE value="fix TextComponent by Creating 2 separate" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix TextComponent by Creating 2 separate" />
+    <MESSAGE value="Adding newTextArea" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding newTextArea" />
   </component>
 </project>

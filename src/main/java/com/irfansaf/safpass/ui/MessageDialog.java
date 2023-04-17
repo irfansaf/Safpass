@@ -1,6 +1,12 @@
 package com.irfansaf.safpass.ui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -12,8 +18,17 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.*;
-import javax.swing.border.Border;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.irfansaf.safpass.util.SpringUtilities;
@@ -185,10 +200,43 @@ public final class MessageDialog extends JDialog implements ActionListener {
         return showMessageDialog(parent, message, "Confirmation", getIcon("dialog_question"), optionType);
     }
 
+    /**
+     * Shows a password dialog.
+     *
+     * @param parent parent component
+     * @param confirm password confirmation
+     * @return the password
+     */
     public static char[] showPasswordDialog(final Component parent, final boolean confirm) {
         JPanel panel = new JPanel();
         panel.add(new JLabel("Password:"));
         final JPasswordField password = TextComponentFactory.newPasswordField();
+        panel.add(password);
+        JPasswordField repeat = null;
+        if (confirm) {
+            repeat = TextComponentFactory.newPasswordField();
+            panel.add(new JLabel("Repeat:"));
+            panel.add(repeat);
+        }
+        panel.setLayout(new SpringLayout());
+        SpringUtilities.makeCompactGrid(panel, confirm ? 2 : 1, 2. 5, 5, 5);
+
+        boolean incorrect = true;
+        while (incorrect) {
+            int option = showMessageDialog(parent, panel, "Enter Password", getIcon("dialog_lock"), OK_CANCEL_OPTION);
+            if (option == OK_OPTION) {
+                if (password.getPassword().length == 0) {
+                    showWarningMessage(parent, "Please enter a password.");
+                } else if (confirm && !Arrays.equals(password.getPassword(), repeat.getPassword())) {
+                    showWarningMessage(parent, "Password and repetead password are not identical.");
+                } else {
+                    incorrect = false;
+                }
+            } else {
+                return null;
+            }
+        }
+        return password.getPassword();
 
     }
 
@@ -214,7 +262,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
 
     public static ImageIcon getIcon (String name, int width, int height) {
         try {
-            return new SvgImageIcon ("resources/images/" + name + ".svg", width. height)
+            return new SvgImageIcon ("resources/images/" + name + ".svg", width. height);
         } catch (Exception e) {
             return null;
         }

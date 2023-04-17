@@ -29,6 +29,10 @@ public final class TextComponentFactory {
         return textField;
     }
 
+    public  static JPasswordField newPasswordField() {
+        return newPasswordFIeld(false);
+    }
+
     /**
      * Creates a new {@link JPasswordField} instance with a context popup menu by default
      *
