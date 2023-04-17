@@ -28,4 +28,41 @@ public final class TextComponentFactory {
         TextComponentActionType.bindAllActions(textField);
         return textField;
     }
+
+    /**
+     * Creates a new {@link JPasswordField} instance with a context popup menu by default
+     *
+     * @param copyEnabled forces the copy of password field content to clipboard
+     * @return the new instance
+     */
+    public static JPasswordField newPasswordFIeld(boolean copyEnabled) {
+        JPasswordField passwordField = new CopiablePasswordField(copyEnabled);
+        passwordField.addMouseListener(new TextComponentPopupListener());
+        TextComponentActionType.bindAllActions(passwordField);
+        return  passwordField;
+    }
+
+    /**
+     * Creates a new {@link JTextArea} instnace with a context popup menu by default
+     *
+     * @return the new instance
+     */
+    public static JTextArea newTextArea() {
+        return newTextArea(null);
+    }
+
+    /**
+     * Creates a new {@link JTextArea} instance with a context popup menu by default
+     *
+     * @param text the initial text
+     * @return the new instance
+     */
+    public static JTextArea newTextArea(String text) {
+        JTextArea textArea = text == null ? new JTextArea() : new JTextArea(text);
+        textArea.addMouseListener(new TextComponentPopupListener());
+        TextComponentActionType.bindAllActions(textArea);
+        return textArea;
+    }
+
+
 }
