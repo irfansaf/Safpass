@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="adding Configuration">
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Add CryptUtils for Hasing and Key Derivation">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/GeneratePasswordDialog.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/helper/EntryHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/CryptUtils.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/com/irfansaf/safpass/util/CryptUtilsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafpassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/CryptUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/CryptUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +90,7 @@
       <workItem from="1681534501310" duration="6668000" />
       <workItem from="1681563434432" duration="5090000" />
       <workItem from="1681707409236" duration="10027000" />
-      <workItem from="1681720834925" duration="2975000" />
+      <workItem from="1681720834925" duration="6606000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -234,7 +232,21 @@
       <option name="project" value="LOCAL" />
       <updated>1681718478369</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Add CryptUtils for Hasing and Key Derivation">
+      <created>1681735049749</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1681735049749</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add CryptUtils for Hasing and Key Derivation">
+      <created>1681735088601</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1681735088601</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +273,7 @@
     <MESSAGE value="create XML dateformat" />
     <MESSAGE value="create XML Converter" />
     <MESSAGE value="adding Configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding Configuration" />
+    <MESSAGE value="Add CryptUtils for Hasing and Key Derivation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add CryptUtils for Hasing and Key Derivation" />
   </component>
 </project>

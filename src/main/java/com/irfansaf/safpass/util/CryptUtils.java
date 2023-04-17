@@ -74,4 +74,38 @@ public final class CryptUtils {
             throw new RuntimeException("Could not generate SHA-256 key: " + e.getMessage());
         }
     }
+
+    /**
+     * Generates a random byte array of the specified length to be used as a salt for cryptographic operations.
+     *
+     * @param saltLength The desired length of the salt in bytes.
+     * @return A byte array containing a random salt of the specified length.
+     */
+    public static byte[] generateRandomSalt(int saltLength) {
+        byte[] salt = new byte[saltLength];
+        if (saltLength > 0) {
+            CryptUtils.newRandomNumberGenerator().nextBytes(salt);
+        }
+        return salt;
+    }
+
+    /**
+     * Get random number generator.
+     *
+     * <p>
+     *      it tries to return with a nondeterministic secure random generator first,
+     *      if it was unsuccessfully for some reason, it returns with the uniform random generator.
+     * </p>
+     *
+     * @return the random number generator
+     */
+    public static Random newRandomNumberGenerator() {
+        Random ret;
+        try {
+            ret = new SecureRandom();
+        } catch (Exception e) {
+            ret = new Random();
+        }
+        return ret;
+    }
 }
