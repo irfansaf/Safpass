@@ -175,7 +175,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
      * @param message dialog message
      */
     public static void showErrorMessage(final Component parent, final String message) {
-        showMessageDialog(parent, message, "Error", getIcon("dialog_error"))
+        showMessageDialog(parent, message, "Error", getIcon("dialog_error"));
     }
 
     /**
@@ -219,7 +219,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
             panel.add(repeat);
         }
         panel.setLayout(new SpringLayout());
-        SpringUtilities.makeCompactGrid(panel, confirm ? 2 : 1, 2. 5, 5, 5);
+        SpringUtilities.makeCompactGrid(panel, confirm ? 2 : 1, 2, 5, 5, 5, 5);
 
         boolean incorrect = true;
         while (incorrect) {
@@ -262,7 +262,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
 
     public static ImageIcon getIcon (String name, int width, int height) {
         try {
-            return new SvgImageIcon ("resources/images/" + name + ".svg", width. height);
+            return new SvgImageIcon ("resources/images/" + name + ".svg", width, height);
         } catch (Exception e) {
             return null;
         }
@@ -275,7 +275,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
         StringBuilder builder = new StringBuilder();
         BufferedReader bufferedReader = null;
         try {
-            InputStream is = messageDialog.class.getClassLoader().getResourceAsStream("resources/" + name);
+            InputStream is = MessageDialog.class.getClassLoader().getResourceAsStream("resources/" + name);
             bufferedReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
             String line;
             while ((line = bufferedReader.readLine()) != null) {
