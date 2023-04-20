@@ -36,10 +36,12 @@ import com.irfansaf.safpass.util.SpringUtilities;
 
 public final class MessageDialog extends JDialog implements ActionListener {
     private static final Logger LOG = Logger.getLogger(MessageDialog.class.getName());
+
     public static final int DEFAULT_OPTION = -1;
     public static final int YES_NO_OPTION = 0;
     public static final int YES_NO_CANCEL_OPTION = 1;
     public static final int OK_CANCEL_OPTION = 2;
+
     public static final int YES_OPTION = 0;
     public static final int OK_OPTION = 0;
     public static final int NO_OPTION = 1;
@@ -58,15 +60,16 @@ public final class MessageDialog extends JDialog implements ActionListener {
         initializeDialog(parent, message, title, icon, optionType);
     }
 
-    private void initializeDialog (final Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
+    private void initializeDialog(final Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
         setModal(true);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(title);
         this.selectedOption = CLOSED_OPTION;
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
         JButton defaultButton;
         switch (optionType) {
-            case YES_NO_OPTION :
+            case YES_NO_OPTION:
                 defaultButton = createButton("Yes", YES_OPTION, getIcon("accept"));
                 buttonPanel.add(defaultButton);
                 buttonPanel.add(createButton("No", NO_OPTION, getIcon("close")));
@@ -119,10 +122,11 @@ public final class MessageDialog extends JDialog implements ActionListener {
         setResizable(false);
         pack();
         setSize((int) (getWidth() * widthMultiplier), getHeight());
+        setLocationRelativeTo(parent);
         setVisible(true);
     }
 
-    private JButton createButton(String name, int option ,ImageIcon icon) {
+    private JButton createButton(String name, int option, ImageIcon icon) {
         JButton button = new JButton(name, icon);
         button.setMnemonic(name.charAt(0));
         button.setActionCommand(String.valueOf(option));
@@ -144,7 +148,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
         showMessageDialog(parent, message, title, icon, DEFAULT_OPTION);
     }
 
-    private static int showMessageDialog(final  Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
+    private static int showMessageDialog(final Component parent, final Object message, final String title, ImageIcon icon, int optionType) {
         int ret = CLOSED_OPTION;
         MessageDialog dialog = null;
         if (parent instanceof Frame) {
@@ -189,7 +193,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
     }
 
     /**
-     * Shows a question dialog
+     * Shows a question dialog.
      *
      * @param parent parent component
      * @param message dialog message
@@ -228,7 +232,7 @@ public final class MessageDialog extends JDialog implements ActionListener {
                 if (password.getPassword().length == 0) {
                     showWarningMessage(parent, "Please enter a password.");
                 } else if (confirm && !Arrays.equals(password.getPassword(), repeat.getPassword())) {
-                    showWarningMessage(parent, "Password and repetead password are not identical.");
+                    showWarningMessage(parent, "Password and repeated password are not identical.");
                 } else {
                     incorrect = false;
                 }
@@ -236,8 +240,8 @@ public final class MessageDialog extends JDialog implements ActionListener {
                 return null;
             }
         }
-        return password.getPassword();
 
+        return password.getPassword();
     }
 
     /**
@@ -259,17 +263,16 @@ public final class MessageDialog extends JDialog implements ActionListener {
      * @param height the image height
      * @return ImageIcon object
      */
-
-    public static ImageIcon getIcon (String name, int width, int height) {
+    public static ImageIcon getIcon(String name, int width, int height) {
         try {
-            return new SvgImageIcon ("resources/images/" + name + ".svg", width, height);
+            return new SvgImageIcon("resources/images/" + name + ".svg", width, height);
         } catch (Exception e) {
             return null;
         }
     }
 
     /**
-     * Get Resource as String
+     * Get resource as string
      */
     private static String getResourceAsString(String name) {
         StringBuilder builder = new StringBuilder();
@@ -282,19 +285,18 @@ public final class MessageDialog extends JDialog implements ActionListener {
                 builder.append(line).append('\n');
             }
         } catch (Exception e) {
-            LOG.log(Level.WARNING, String.format("An error occured during reading resource [%s]", name), e);
+            LOG.log(Level.WARNING, String.format("An error occurred during reading resource [%s]", name), e);
         } finally {
             try {
                 if (bufferedReader != null) {
                     bufferedReader.close();
                 }
             } catch (IOException e) {
-                LOG.log(Level.WARNING, String.format("An error occured during closing reader for resource [%s]", name), e);
+                LOG.log(Level.WARNING, String.format("An error occurred during closing reader for resource [%s]", name), e);
             }
         }
         return builder.toString();
     }
-
 
     /**
      * Shows a text file from the class path.
@@ -303,7 +305,6 @@ public final class MessageDialog extends JDialog implements ActionListener {
      * @param title window title
      * @param textFile text file name
      */
-
     public static void showTextFile(final Component parent, final String title, final String textFile) {
         JTextArea area = TextComponentFactory.newTextArea(getResourceAsString(textFile));
         area.setLineWrap(true);
@@ -311,7 +312,8 @@ public final class MessageDialog extends JDialog implements ActionListener {
         area.setEditable(false);
         area.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 12));
         JScrollPane scrollPane = new JScrollPane(area);
-        scrollPane.setPreferredSize(new Dimension(600,400));
+        scrollPane.setPreferredSize(new Dimension(600, 400));
+        showMessageDialog(parent, scrollPane, title, null, DEFAULT_OPTION);
     }
 
 }
