@@ -7,7 +7,7 @@ package com.irfansaf.safpass.util;
  */
 public final class StringUtils {
     private StringUtils() {
-        // utility class
+        // Utility Class
     }
 
     /**
