@@ -2,9 +2,7 @@ package com.irfansaf.safpass.ui.action;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 
-import javax.sound.sampled.Clip;
 import javax.swing.Action;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
