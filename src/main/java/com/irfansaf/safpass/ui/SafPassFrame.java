@@ -7,10 +7,10 @@ import com.irfansaf.safpass.ui.helper.FileHelper;
 import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.xml.bind.Entry;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -37,6 +37,11 @@ public final class SafPassFrame extends JFrame {
 
     private final JPanel topContainerPanel;
     private final JMenuBar safpassMenuBar;
+    private final JMenu fileMenu;
+//    private final JMenu editMenu;
+    private final JMenu toolsMenu;
+    private final JMenu helpMenu;
+    private final JScrollPane scrollPane;
     private JToolBar toolBar;
     private final SearchPanel searchPanel;
     private volatile boolean processing = false;
@@ -58,6 +63,75 @@ public final class SafPassFrame extends JFrame {
         this.toolBar.setFloatable(true);
         this.toolBar.add(MenuActionType.NEW_FILE.getAction());
         this.toolBar.add(MenuActionType.OPEN_FILE.getAction());
+        this.toolBar.add(MenuActionType.SAVE_FILE.getAction());
+        this.toolBar.addSeparator();
+        this.toolBar.add(MenuActionType.ABOUT.getAction());
+        this.toolBar.add(MenuActionType.EXIT.getAction());
+
+        this.searchPanel = new SearchPanel(enabled -> {
+            if (enabled) {
+                refreshEntryTitleList(null);
+            }
+        });
+
+        this.topContainerPanel = new JPanel(new BorderLayout());
+        this.topContainerPanel.add(this.toolBar, BorderLayout.NORTH);
+        this.topContainerPanel.add(this.searchPanel, BorderLayout.SOUTH);
+
+        this.safpassMenuBar = new JMenuBar();
+
+        this.fileMenu = new JMenu("File");
+        this.fileMenu.setMnemonic(KeyEvent.VK_F);
+        this.fileMenu.add(MenuActionType.NEW_FILE.getAction());
+        this.fileMenu.add(MenuActionType.OPEN_FILE.getAction());
+        this.fileMenu.add(MenuActionType.SAVE_FILE.getAction());
+        this.fileMenu.add(MenuActionType.SAVE_AS_FILE.getAction());
+        this.fileMenu.addSeparator();
+        this.fileMenu.add(MenuActionType.EXPORT_XML.getAction());
+        this.fileMenu.add(MenuActionType.IMPORT_XML.getAction());
+        this.fileMenu.addSeparator();
+        this.fileMenu.add(MenuActionType.CHANGE_PASSWORD.getAction());
+        this.fileMenu.addSeparator();
+        this.fileMenu.add(MenuActionType.EXIT.getAction());
+        this.safpassMenuBar.add(this.fileMenu);
+
+        this.toolsMenu = new JMenu("Tools");
+        this.toolsMenu.setMnemonic(KeyEvent.VK_T);
+        this.toolsMenu.add(MenuActionType.GENERATE_PASSWORD.getAction());
+        this.safpassMenuBar.add(this.toolsMenu);
+
+        this.helpMenu = new JMenu("Help");
+        this.helpMenu.setMnemonic(KeyEvent.VK_H);
+        this.helpMenu.add(MenuActionType.LICENSE.getAction());
+        this.helpMenu.addSeparator();
+        this.helpMenu.add(MenuActionType.ABOUT.getAction());
+        this.safpassMenuBar.add(this.helpMenu);
+
+        this.entryDetailsTable = new EntryDetailsTable();
+        this.scrollPane = new JScrollPane(this.entryDetailsTable);
+        MenuActionType.bindAllActions(this.entryDetailsTable);
+
+        this.statusPanel = new StatusPanel();
+
+        refreshAll();
+
+        getContentPane().add(this.topContainerPanel, BorderLayout.NORTH);
+        getContentPane().add(this.scrollPane, BorderLayout.CENTER);
+        getContentPane().add(this.statusPanel, BorderLayout.SOUTH);
+
+        setJMenuBar(this.safpassMenuBar);
+        setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        setSize(450, 400);
+        setMinimumSize(new Dimension(420, 200));
+//        addWindowListener(new CloseListener());
+        setLocationRelativeTo(null);
+        setVisible(true);
+        FileHelper.openFileInBackground(fileName, this);
+
+        /**
+         * Set focus on the list for easier keyboard navigation
+         */
+        this.entryDetailsTable.requestFocusInWindow();
     }
 
     public static SafPassFrame getInstance() {
@@ -151,7 +225,7 @@ public final class SafPassFrame extends JFrame {
      */
     public void exitFrame() {
         if (Configuration.getInstance().is("clear.clipboard.on.exit.enabled", false)) {
-            EntryHelper.copyEntryField(this, null);
+//            EntryHelper.copyEntryField(this, null);
         }
         if (this.processing) {
             return;

@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Add CryptUtils for Hasing and Key Derivation">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/GeneratePasswordDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding saveFile on FileHelper">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/EntryDetailsTable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/StatusPanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/AbstractMenuAction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/TableListener.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/helper/EntryHelper.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/com/irfansaf/safpass/util/CryptUtilsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/CryptUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/CryptUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/helper/FileHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/helper/FileHelper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,30 +51,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Problems&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -91,6 +96,10 @@
       <workItem from="1681563434432" duration="5090000" />
       <workItem from="1681707409236" duration="10027000" />
       <workItem from="1681720834925" duration="6606000" />
+      <workItem from="1681914633383" duration="2517000" />
+      <workItem from="1681923837913" duration="2941000" />
+      <workItem from="1681926814400" duration="3218000" />
+      <workItem from="1681958135672" duration="9241000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -246,14 +255,48 @@
       <option name="project" value="LOCAL" />
       <updated>1681735088601</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Adding StringUtils, SearchPanel, MenuActionType">
+      <created>1681925304877</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1681925304877</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Adding DateUtils">
+      <created>1681926943268</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1681926943268</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Adding DataModel to SafPassFrame">
+      <created>1681960952153</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1681960952153</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Adding FileHelper">
+      <created>1681962029405</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1681962029405</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Adding saveFile on FileHelper">
+      <created>1681963819091</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1681963819091</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initialized Final project OOVP" />
     <MESSAGE value="Adding FlatLaf UI Components" />
     <MESSAGE value="Creating Utility Method, and creating form or grid-style layout with SpringLayout" />
     <MESSAGE value="Working on Message Dialog" />
@@ -274,6 +317,11 @@
     <MESSAGE value="create XML Converter" />
     <MESSAGE value="adding Configuration" />
     <MESSAGE value="Add CryptUtils for Hasing and Key Derivation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add CryptUtils for Hasing and Key Derivation" />
+    <MESSAGE value="Adding StringUtils, SearchPanel, MenuActionType" />
+    <MESSAGE value="Adding DateUtils" />
+    <MESSAGE value="Adding DataModel to SafPassFrame" />
+    <MESSAGE value="Adding FileHelper" />
+    <MESSAGE value="Adding saveFile on FileHelper" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding saveFile on FileHelper" />
   </component>
 </project>

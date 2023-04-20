@@ -12,9 +12,14 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileFilter;
 
-import static com.irfansaf.safpass.ui.MessageDialog.*;
+import static com.irfansaf.safpass.ui.MessageDialog.showPasswordDialog;
+import static com.irfansaf.safpass.ui.MessageDialog.showWarningMessage;
+import static com.irfansaf.safpass.ui.MessageDialog.showQuestionMessage;
+import static com.irfansaf.safpass.ui.MessageDialog.YES_NO_OPTION;
+import static com.irfansaf.safpass.ui.MessageDialog.YES_NO_CANCEL_OPTION;
+import static com.irfansaf.safpass.ui.MessageDialog.YES_OPTION;
+import static com.irfansaf.safpass.ui.MessageDialog.NO_OPTION;
 import static com.irfansaf.safpass.util.StringUtils.stripString;
-import static java.lang.CharSequence.compare;
 import static java.lang.String.format;
 
 public final class FileHelper {
@@ -25,7 +30,7 @@ public final class FileHelper {
             + "Do you want to save the changes before closing?";
     private static final String CREATE_FILE_QUESTION_MESSAGE
             = "File not found:\n%s\n\nDo you want to create the file?";
-    private static final String SAVE_MODIFIED_QUESTOON_MESSAGE
+    public static final String SAVE_MODIFIED_QUESTION_MESSAGE
             = "The current file has been modified.\n"
             + "Do you want to save the changes before closing?";
     private static final String UNENCRYPTED_DATA_WARNING_MESSAGE
@@ -34,7 +39,7 @@ public final class FileHelper {
     private static final String OPERATION_ERROR_MESSAGE
             = "An error occurred during the %s operation:\n%s";
     private static final String OPEN_ERROR_CHECK_PASSWORD_ERROR_MESSAGE
-            = "An error occurred during the open opeartion.\nThe password might be incorrected.\n(Error: %s)";
+            = "An error occurred during the open operation.\nThe password might be uncorrected.\n(Error: %s)";
 
 
     private static final String SAFPASS_DATA_FILES = "SafPass Data Files (*.safpass)";
@@ -42,6 +47,119 @@ public final class FileHelper {
 
     private FileHelper() {
         // Not intended to be instantiated
+    }
+
+    /**
+     * Creates a new entries document.
+     *
+     * @param parent parent component
+     */
+    public static void createNew(final SafPassFrame parent) {
+        if (parent.getModel().isModified()) {
+            int option = showQuestionMessage(parent, SAVE_MODIFIED_QUESTION_MESSAGE, YES_NO_CANCEL_OPTION);
+            if (option == YES_OPTION) {
+                saveFile(parent, false, () -> {
+                    parent.clearModel();
+                    parent.getSearchPanel().setEnabled(false);
+                    parent.refreshAll();
+                });
+                return;
+            } else if (option != NO_OPTION) {
+                return;
+            }
+            parent.clearModel();
+            parent.getSearchPanel().setVisible(false);
+            parent.refreshAll();
+        }
+    }
+
+    /**
+     * Shows a file chooser dialog and exports the file
+     *
+     * @param parent parent component
+     */
+    public static void exportFile(final SafPassFrame parent) {
+        showWarningMessage(parent, UNENCRYPTED_DATA_WARNING_MESSAGE);
+        File file = showFileChooser(parent, "Export", "xml", XML_FILES);
+        if (file == null) {
+            return;
+        }
+        final String fileName = checkExtension(file.getPath(), "xml");
+        if (!checkFileOverwrite(fileName, parent)) {
+            return;
+        }
+        Worker worker = new Worker(parent) {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    EntriesRepository.newInstance(fileName).writeDocument(parent.getModel().getEntries());
+                } catch (Throwable e) {
+                    throw new Exception(format(OPERATION_ERROR_MESSAGE, "export", e.getMessage()));
+                }
+                return null;
+            }
+        };
+        worker.execute();
+    }
+
+    /**
+     * Shows a file chooser dialog and exports the file.
+     *
+     * @param parent parent component
+     */
+    public static void importFile(final  SafPassFrame parent) {
+        File file = showFileChooser(parent, "Import", "xml", XML_FILES);
+        if (file == null) {
+            return;
+        }
+        final String fileName = file.getPath();
+        if (parent.getModel().isModified()) {
+            int option = showQuestionMessage(parent, SAVE_MODIFIED_QUESTION_MESSAGE, YES_NO_CANCEL_OPTION);
+            if (option == YES_OPTION) {
+                saveFile(parent, false, () -> importFileInBackground(fileName, parent));
+                return;
+            } else if (option != NO_OPTION) {
+                return;
+            }
+        }
+        importFileInBackground(fileName, parent);
+    }
+
+    /**
+     * Imports the given file.
+     *
+     * @param fileName filename
+     * @param parent component
+     */
+    static void importFileInBackground(final String fileName, final SafPassFrame parent) {
+        Worker worker = new Worker(parent) {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    parent.getModel().setEntries(EntriesRepository.newInstance(fileName).readDocument());
+                    parent.getModel().setModified(true);
+                    parent.getModel().setFileName(null);
+                    parent.getModel().setPassword(null);
+                    parent.getSearchPanel().setVisible(false);
+                } catch (Throwable e) {
+                    throw new Exception(format(OPERATION_ERROR_MESSAGE, "import", e.getMessage()));
+                }
+                return null;
+            }
+        };
+        worker.execute();
+    }
+
+    /**
+     * Showsa file chooser dialog and saves a file
+     *
+     * @param parent component
+     * @param saveAs normal 'Save' dialog or 'Save as'
+     */
+    public static void saveFile(final SafPassFrame parent, final boolean saveAs) {
+        saveFile(parent, saveAs, () -> {
+            // Default Empty Call
+        });
     }
 
     /**
@@ -119,7 +237,7 @@ public final class FileHelper {
             return;
         }
         if (parent.getModel().isModified()) {
-            int option = showQuestionMessage(parent, SAVE_MODIFIED_QUESTOON_MESSAGE, YES_NO_CANCEL_OPTION);
+            int option = showQuestionMessage(parent, SAVE_MODIFIED_QUESTION_MESSAGE, YES_NO_CANCEL_OPTION);
             if (option == YES_OPTION) {
                 saveFile(parent, false, () -> openFileInBackground(file.getPath(), parent));
                 return;
