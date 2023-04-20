@@ -45,7 +45,92 @@ public final class FileHelper {
     }
 
     /**
-     * LLoads a file and fills the data model.
+     * Shows a file chooser dialog and saves a file
+     *
+     * @param parent component
+     * @param saveAs normal 'Save' dialog or 'Save as'
+     * @param successCallback callback which is called when the file has been
+     *                        successfully saved
+     */
+    public static void saveFile(final SafPassFrame parent, final boolean saveAs, final Runnable successCallback) {
+        final String fileName;
+        if (saveAs || parent.getModel().getFileName() == null) {
+            File file = showFileChooser(parent, "Save", "safpass", SAFPASS_DATA_FILES);
+            if (file == null) {
+                return;
+            }
+            fileName = checkExtension(file.getPath(), "safpass");
+            if (!checkFileOverwrite(fileName, parent)) {
+                return;
+            }
+        } else {
+            fileName = parent.getModel().getFileName();
+        }
+
+        final char[] password;
+        if (parent.getModel().getPassword() == null) {
+            password = showPasswordDialog(parent, true);
+            if (password == null) {
+                return;
+            }
+        } else {
+            password = parent.getModel().getPassword();
+        }
+        Worker worker = new Worker(parent) {
+            @Override
+            protected Void doInBackground() throws Exception {
+                try {
+                    EntriesRepository.newInstance(fileName, password).writeDocument(parent.getModel().getEntries());
+                    parent.getModel().setFileName(fileName);
+                    parent.getModel().setPassword(password);
+                    parent.getModel().setModified(false);
+                } catch (Throwable e) {
+                    throw new Exception(format(OPERATION_ERROR_MESSAGE, "save", e.getMessage()));
+                }
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                stopProcessing();
+                boolean result = true;
+                try {
+                    get();
+                } catch (Exception e) {
+                    result = false;
+                    showErrorMessage(e);
+                }
+                if (result) {
+                    successCallback.run();
+                }
+            }
+        };
+        worker.execute();
+    }
+
+    /**
+     * Shows a file chooser dialog and opens a file
+     *
+     * @param parent component
+     */
+    public static void openFile(final SafPassFrame parent) {
+        final File file = showFileChooser(parent, "Open", "safpass", SAFPASS_DATA_FILES);
+        if (file == null) {
+            return;
+        }
+        if (parent.getModel().isModified()) {
+            int option = showQuestionMessage(parent, SAVE_MODIFIED_QUESTOON_MESSAGE, YES_NO_CANCEL_OPTION);
+            if (option == YES_OPTION) {
+                saveFile(parent, false, () -> openFileInBackground(file.getPath(), parent));
+                return;
+            } else if (option != NO_OPTION) {
+                return;
+            }
+        }
+    }
+
+    /**
+     * Loads a file and fills the data model.
      *
      * @param fileName
      * @param parent

@@ -213,6 +213,8 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
                 return;
             }
             dispose();
+        } else if ("cancel_button".equals(command)){
+            dispose();
         }
     }
 

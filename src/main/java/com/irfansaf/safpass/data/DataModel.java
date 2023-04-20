@@ -35,7 +35,7 @@ public final class DataModel {
      *
      * @return list of entries
      */
-    private Entries getEntries() {
+    public Entries getEntries() {
         return this.entries;
     }
 
