@@ -24,7 +24,6 @@ import javax.swing.JToggleButton;
 import javax.swing.SpringLayout;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.text.html.Option;
 
 import static com.irfansaf.safpass.ui.helper.EntryHelper.copyEntryField;
 
