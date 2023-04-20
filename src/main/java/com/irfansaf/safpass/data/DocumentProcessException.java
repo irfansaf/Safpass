@@ -8,6 +8,6 @@ package com.irfansaf.safpass.data;
 public class DocumentProcessException extends Exception{
 
     public DocumentProcessException(String message) {
-        super("Cannon process document due to the following exception:\n" + message);
+        super("Cannot process document due to the following exception:\n" + message);
     }
 }

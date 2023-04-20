@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.Stack;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class Configuration {
+
     private static final Logger LOG = Logger.getLogger(Configuration.class.getName());
     private static Configuration instance;
     private Properties properties = new Properties();
@@ -22,7 +22,7 @@ public final class Configuration {
                 is.close();
             }
         } catch (Exception e) {
-            LOG.log(Level.WARNING, "An error occured during laoding configuration.", e);
+            LOG.log(Level.WARNING, "An error occurred during loading configuration.", e);
         }
     }
 
@@ -53,8 +53,8 @@ public final class Configuration {
         return value;
     }
 
-    public Boolean is(String key, Boolean defaultvalue) {
-        return getValue(key, defaultvalue, Boolean.class);
+    public Boolean is(String key, Boolean defaultValue) {
+        return getValue(key, defaultValue, Boolean.class);
     }
 
     public Integer getInteger(String key, Integer defaultValue) {
@@ -74,7 +74,7 @@ public final class Configuration {
     }
 
     public static synchronized Configuration getInstance() {
-        if (instance == null ) {
+        if (instance == null) {
             instance = new Configuration();
         }
         return instance;

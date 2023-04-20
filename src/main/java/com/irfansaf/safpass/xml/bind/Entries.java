@@ -25,9 +25,9 @@ import java.util.List;
  * </pre>
  *
  */
-
 @JacksonXmlRootElement(localName = "entries")
 public class Entries {
+
     protected List<Entry> entry;
 
     /**
@@ -51,11 +51,11 @@ public class Entries {
      *
      * @return list of {@link Entry} objects
      */
-
     public List<Entry> getEntry() {
         if (entry == null) {
             entry = new ArrayList<>();
         }
         return this.entry;
     }
+
 }

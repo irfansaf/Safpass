@@ -9,13 +9,14 @@ import java.util.stream.Collectors;
 public final class DataModel {
 
     private static DataModel instance;
+
     private Entries entries = new Entries();
     private String fileName = null;
     private char[] password = null;
     private boolean modified = false;
 
     private DataModel() {
-        // Not Intended to be instantiated
+        // not intended to be instantiated
     }
 
     /**
@@ -42,24 +43,25 @@ public final class DataModel {
     /**
      * Sets list of entries.
      *
-     * @param entries
+     * @param entries entries
      */
     public void setEntries(final Entries entries) {
         this.entries = entries;
     }
 
     /**
-     * Gets the filename for the data model.
+     * Gets the file name for the data model.
      *
-     * @return filename
+     * @return file name
      */
     public String getFileName() {
         return this.fileName;
     }
 
     /**
-     * Sets the filename for data model.
-     * @param fileName
+     * Sets the file name for the data model.
+     *
+     * @param fileName file name
      */
     public void setFileName(final String fileName) {
         this.fileName = fileName;
@@ -77,7 +79,7 @@ public final class DataModel {
     /**
      * Sets the modified state of the data model.
      *
-     * @param modified state
+     * @param modified modified state
      */
     public void setModified(final boolean modified) {
         this.modified = modified;
@@ -113,10 +115,10 @@ public final class DataModel {
     }
 
     /**
-     * Gets entry by title
+     * Gets entry by title.
      *
      * @param title entry title
-     * @return entry {@code null} can be null
+     * @return entry (can be null)
      */
     public Entry getEntryByTitle(String title) {
         int entryIndex = getEntryIndexByTitle(title);
@@ -127,7 +129,7 @@ public final class DataModel {
     }
 
     /**
-     * Gets entry index by title
+     * Gets entry index by title.
      *
      * @param title entry title
      * @return entry index
@@ -135,8 +137,4 @@ public final class DataModel {
     private int getEntryIndexByTitle(String title) {
         return getTitles().indexOf(title);
     }
-
-
-
-
 }
