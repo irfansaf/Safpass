@@ -50,6 +50,12 @@ public final class CryptUtils {
         }
     }
 
+    /**
+     * Calculate SHA-256 hash, with 1000 iterations by default
+     *
+     * @param text password text
+     * @return hash of the password
+     */
     public static byte[] getSha256HashWithDefaultIterations(final char[] text) {
         return getSha256Hash(text, 1000);
     }
@@ -58,6 +64,13 @@ public final class CryptUtils {
         return getSha256Hash(text, 0);
     }
 
+    /**
+     * Calculate SHA-256 Hash.
+     *
+     * @param text password text
+     * @param iteration number of iteration
+     * @return hash of the password
+     */
     private static byte[] getSha256Hash(final char[] text, final int iteration) {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
