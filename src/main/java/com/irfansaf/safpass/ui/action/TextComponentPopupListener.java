@@ -24,7 +24,7 @@ public class TextComponentPopupListener extends MouseAdapter {
     private final Map<TextComponentActionType, JMenuItem> items;
 
     public TextComponentPopupListener() {
-        items = Stream.of(CUT,COPY, PASTE, DELETE, CLEAR_ALL, SELECT_ALL)
+        items = Stream.of(CUT, COPY, PASTE, DELETE, CLEAR_ALL, SELECT_ALL)
                 .collect(Collectors.toMap(
                         Function.identity(),
                         type -> new JMenuItem(type.getAction()),

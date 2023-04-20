@@ -9,7 +9,7 @@ public abstract class TextComponentAction extends TextAction {
     public TextComponentAction(String text, KeyStroke accelerator, int mnemonic) {
         super(text);
         if (accelerator != null) {
-            putValue(ACCELERATOR_KEY,accelerator);
+            putValue(ACCELERATOR_KEY, accelerator);
         }
         putValue(MNEMONIC_KEY, mnemonic);
     }
