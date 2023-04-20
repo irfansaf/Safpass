@@ -1,6 +1,5 @@
 package com.irfansaf.safpass.ui.action;
 
-import com.irfansaf.safpass.ui.EntryDialog;
 import com.irfansaf.safpass.ui.GeneratePasswordDialog;
 import com.irfansaf.safpass.ui.MessageDialog;
 import com.irfansaf.safpass.ui.SafPassFrame;
@@ -9,7 +8,6 @@ import com.irfansaf.safpass.xml.bind.Entry;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.security.Key;
 
 import javax.swing.Action;
 import javax.swing.ActionMap;

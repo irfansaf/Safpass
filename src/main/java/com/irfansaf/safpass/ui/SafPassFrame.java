@@ -1,16 +1,19 @@
 package com.irfansaf.safpass.ui;
 
 import com.irfansaf.safpass.data.DataModel;
+import com.irfansaf.safpass.ui.action.CloseListener;
 import com.irfansaf.safpass.ui.action.MenuActionType;
 import com.irfansaf.safpass.ui.helper.EntryHelper;
 import com.irfansaf.safpass.ui.helper.FileHelper;
 import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.xml.bind.Entry;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.security.Key;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,7 +30,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.WindowConstants;
 
-import static com.irfansaf.safpass.ui.MessageDialog.*;
+import static com.irfansaf.safpass.ui.MessageDialog.NO_OPTION;
+import static com.irfansaf.safpass.ui.MessageDialog.YES_NO_CANCEL_OPTION;
+import static com.irfansaf.safpass.ui.MessageDialog.YES_OPTION;
+import static com.irfansaf.safpass.ui.MessageDialog.getIcon;
+import static com.irfansaf.safpass.ui.MessageDialog.showQuestionMessage;
 
 public final class SafPassFrame extends JFrame {
     private static final Logger LOG = Logger.getLogger(SafPassFrame.class.getName());
@@ -150,7 +157,7 @@ public final class SafPassFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         setSize(450, 400);
         setMinimumSize(new Dimension(420, 200));
-//        addWindowListener(new CloseListener());
+        addWindowListener(new CloseListener());
         setLocationRelativeTo(null);
         setVisible(true);
         FileHelper.openFileInBackground(fileName, this);
@@ -250,7 +257,7 @@ public final class SafPassFrame extends JFrame {
      */
     public void exitFrame() {
         if (Configuration.getInstance().is("clear.clipboard.on.exit.enabled", false)) {
-//            EntryHelper.copyEntryField(this, null);
+            EntryHelper.copyEntryField(this, null);
         }
         if (this.processing) {
             return;
