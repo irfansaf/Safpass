@@ -1,9 +1,11 @@
 package com.irfansaf.safpass.ui.action;
 
+import com.irfansaf.safpass.ui.EntryDialog;
 import com.irfansaf.safpass.ui.GeneratePasswordDialog;
 import com.irfansaf.safpass.ui.MessageDialog;
 import com.irfansaf.safpass.ui.SafPassFrame;
 import com.irfansaf.safpass.ui.helper.EntryHelper;
+import com.irfansaf.safpass.xml.bind.Entry;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -103,6 +105,72 @@ public enum MenuActionType {
         @Override
         public void actionPerformed(ActionEvent ev) {
             MessageDialog.showTextFile(SafPassFrame.getInstance(), "License", "license.txt");
+        }
+    }),
+    ADD_ENTRY(new AbstractMenuAction("Add Entry...", getIcon("entry_new"), getKeyStroke(KeyEvent.VK_Y, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            EntryHelper.addEntry(SafPassFrame.getInstance());
+        }
+    }),
+    EDIT_ENTRY(new AbstractMenuAction("Edit Entry...", getIcon("entry_edit"), getKeyStroke(KeyEvent.VK_E, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            EntryHelper.editEntry(SafPassFrame.getInstance());
+        }
+    }),
+    DUPLICATE_ENTRY(new AbstractMenuAction("Duplicate Entry...", getIcon("entry_duplicate"), getKeyStroke(KeyEvent.VK_K, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            EntryHelper.duplicateEntry(SafPassFrame.getInstance());
+        }
+    }),
+    DELETE_ENTRY(new AbstractMenuAction("Delete Entry...", getIcon("entry_delete"), getKeyStroke(KeyEvent.VK_D, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            EntryHelper.deleteEntry(SafPassFrame.getInstance());
+        }
+    }),
+    COPY_URL(new AbstractMenuAction("Copy URL", getIcon("url"), getKeyStroke(KeyEvent.VK_U, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            SafPassFrame parent = SafPassFrame.getInstance();
+            Entry entry = EntryHelper.getSelectedEntry(parent);
+            if (entry != null) {
+                EntryHelper.copyEntryField(parent, entry.getUrl());
+            }
+        }
+    }),
+    COPY_USER(new AbstractMenuAction("Copy User Name", getIcon("user"), getKeyStroke(KeyEvent.VK_B, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SafPassFrame parent = SafPassFrame.getInstance();
+            Entry entry = EntryHelper.getSelectedEntry(parent);
+            if (entry != null) {
+                EntryHelper.copyEntryField(parent, entry.getUrl());
+            }
+        }
+    }),
+    COPY_PASSWORD(new AbstractMenuAction("Copy Password", getIcon("keyring"), getKeyStroke(KeyEvent.VK_C, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            SafPassFrame parent = SafPassFrame.getInstance();
+            Entry entry = EntryHelper.getSelectedEntry(parent);
+            if (entry != null) {
+                EntryHelper.copyEntryField(parent, entry.getPassword());
+            }
+        }
+    }),
+    CLEAR_CLIPBOARD(new AbstractMenuAction("Clear Clipboard", getIcon("clear"), getKeyStroke(KeyEvent.VK_X, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            EntryHelper.copyEntryField(SafPassFrame.getInstance(), null);
+        }
+    }),
+    FIND_ENTRY(new AbstractMenuAction("Find Entry", getIcon("find"), getKeyStroke(KeyEvent.VK_F, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            SafPassFrame.getInstance().getSearchPanel().setVisible(true);
         }
     });
 

@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding EntryHelper">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/EntryDetailsTable.java" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Fix Typo Worker.java">
       <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/AbstractMenuAction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/TableListener.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/test/java/com/irfansaf/safpass/util/CryptUtilsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/EntryDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/EntryDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,7 @@
       <workItem from="1681914633383" duration="2517000" />
       <workItem from="1681923837913" duration="2941000" />
       <workItem from="1681926814400" duration="3218000" />
-      <workItem from="1681958135672" duration="13483000" />
+      <workItem from="1681958135672" duration="14629000" />
     </task>
     <task id="LOCAL-00001" summary="Initialized Final project OOVP">
       <created>1681274473224</created>
@@ -314,15 +313,27 @@
       <option name="project" value="LOCAL" />
       <updated>1681973273139</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Adding EntryDetailsTable">
+      <created>1681973862083</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1681973862083</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Fix Typo Worker.java">
+      <created>1681974435756</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1681974435756</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Image Icon and GetIcon" />
-    <MESSAGE value="initializeDialog and createButton" />
     <MESSAGE value="fix main panel area" />
     <MESSAGE value="Creating showMessageDialog function" />
     <MESSAGE value="create constructor for Frame and Dialog" />
@@ -346,6 +357,8 @@
     <MESSAGE value="Fix StatusPanel" />
     <MESSAGE value="Adding EntryDialog and Fix typo" />
     <MESSAGE value="Adding EntryHelper" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding EntryHelper" />
+    <MESSAGE value="Adding EntryDetailsTable" />
+    <MESSAGE value="Fix Typo Worker.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix Typo Worker.java" />
   </component>
 </project>

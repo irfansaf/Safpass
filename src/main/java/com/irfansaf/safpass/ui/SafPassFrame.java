@@ -9,6 +9,7 @@ import com.irfansaf.safpass.xml.bind.Entry;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 import java.util.*;
 import java.util.List;
 import java.util.logging.Level;
@@ -38,7 +39,7 @@ public final class SafPassFrame extends JFrame {
     private final JPanel topContainerPanel;
     private final JMenuBar safpassMenuBar;
     private final JMenu fileMenu;
-//    private final JMenu editMenu;
+    private final JMenu editMenu;
     private final JMenu toolsMenu;
     private final JMenu helpMenu;
     private final JScrollPane scrollPane;
@@ -95,6 +96,20 @@ public final class SafPassFrame extends JFrame {
         this.fileMenu.add(MenuActionType.EXIT.getAction());
         this.safpassMenuBar.add(this.fileMenu);
 
+        this.editMenu = new JMenu("Edit");
+        this.editMenu.setMnemonic(KeyEvent.VK_E);
+        this.editMenu.add(MenuActionType.ADD_ENTRY.getAction());
+        this.editMenu.add(MenuActionType.EDIT_ENTRY.getAction());
+        this.editMenu.add(MenuActionType.DUPLICATE_ENTRY.getAction());
+        this.editMenu.add(MenuActionType.DELETE_ENTRY.getAction());
+        this.editMenu.addSeparator();
+        this.editMenu.add(MenuActionType.COPY_URL.getAction());
+        this.editMenu.add(MenuActionType.COPY_USER.getAction());
+        this.editMenu.add(MenuActionType.COPY_PASSWORD.getAction());
+        this.editMenu.addSeparator();
+        this.editMenu.add(MenuActionType.FIND_ENTRY.getAction());
+        this.safpassMenuBar.add(this.editMenu);
+
         this.toolsMenu = new JMenu("Tools");
         this.toolsMenu.setMnemonic(KeyEvent.VK_T);
         this.toolsMenu.add(MenuActionType.GENERATE_PASSWORD.getAction());
@@ -106,6 +121,18 @@ public final class SafPassFrame extends JFrame {
         this.helpMenu.addSeparator();
         this.helpMenu.add(MenuActionType.ABOUT.getAction());
         this.safpassMenuBar.add(this.helpMenu);
+
+        this.popup = new JPopupMenu();
+        this.popup.add(MenuActionType.ADD_ENTRY.getAction());
+        this.popup.add(MenuActionType.EDIT_ENTRY.getAction());
+        this.popup.add(MenuActionType.DUPLICATE_ENTRY.getAction());
+        this.popup.add(MenuActionType.DELETE_ENTRY.getAction());
+        this.popup.addSeparator();
+        this.popup.add(MenuActionType.COPY_URL.getAction());
+        this.popup.add(MenuActionType.COPY_USER.getAction());
+        this.popup.add(MenuActionType.COPY_PASSWORD.getAction());
+        this.popup.addSeparator();
+        this.popup.add(MenuActionType.FIND_ENTRY.getAction());
 
         this.entryDetailsTable = new EntryDetailsTable();
         this.scrollPane = new JScrollPane(this.entryDetailsTable);
@@ -128,9 +155,7 @@ public final class SafPassFrame extends JFrame {
         setVisible(true);
         FileHelper.openFileInBackground(fileName, this);
 
-        /**
-         * Set focus on the list for easier keyboard navigation
-         */
+        // Set focus on the list for easier keyboard navigation
         this.entryDetailsTable.requestFocusInWindow();
     }
 
