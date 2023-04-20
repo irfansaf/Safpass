@@ -34,9 +34,9 @@ public abstract class Worker extends SwingWorker<Void, Void> {
     protected void showErrorMessage(final Exception e) {
         String message;
         if (e.getCause() != null) {
-            message = e.getMessage().getMessage();
+            message = e.getCause().getMessage();
         } else {
-            message = e,getMessage();
+            message = e.getMessage();
         }
         MessageDialog.showErrorMessage(this.parent, message);
     }
