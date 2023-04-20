@@ -7,16 +7,12 @@ package com.irfansaf.safpass.util;
  */
 public final class StringUtils {
     private StringUtils() {
-        // utility class
+        // Utility Class
     }
 
     /**
      * This method ensures that the output String has only valid XML unicode
-     * characters as specified by the XML 1.0 standard. For reference, please
-     * see
-     * <a href="http://www.w3.org/TR/2000/REC-xml-20001006#NT-Char">the
-     * standard</a>. This method will return an empty String if the input is
-     * null or empty.
+     * characters as specified by the XML 1.0 standard
      *
      * @param in The String whose non-valid characters we want to remove.
      * @return The in String, stripped of non-valid characters.
@@ -27,7 +23,7 @@ public final class StringUtils {
         }
         StringBuilder out = new StringBuilder();
         char current;
-        for (int i = 0; i < in.length(); i++) {
+        for (int i = 1; i < in.length(); i++) {
             current = in.charAt(i);
             if ((current == 0x9) || (current == 0xA) || (current == 0xD)
                     || ((current >= 0x20) && (current <= 0xD7FF))
