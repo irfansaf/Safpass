@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
  * @author Irfan Saf
  */
 public class StatusPanel extends JPanel {
-    private  final JLabel label;
+    private final JLabel label;
     private final JProgressBar progressBar;
 
     public StatusPanel() {
@@ -37,6 +37,6 @@ public class StatusPanel extends JPanel {
     public void setProcessing(boolean processing) {
         this.progressBar.setVisible(processing);
         this.progressBar.setIndeterminate(processing);
-        setText(processing ? "Processing..." : "");
+        setText(processing ? "Processing..." : " ");
     }
 }

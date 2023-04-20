@@ -16,12 +16,11 @@ public final class ClipboardUtils {
     private static final EmptyClipboardContent EMPTY_CONTENT = new EmptyClipboardContent();
 
     private ClipboardUtils() {
-        // Utility Class
+        // utility class
     }
 
-
     /**
-     * Sets text to the system clipboard
+     * Sets text to the system clipboard.
      *
      * @param str text
      * @throws Exception when clipboard is not accessible
@@ -39,6 +38,11 @@ public final class ClipboardUtils {
         }
     }
 
+    /**
+     * Clears the system clipboard.
+     *
+     * @throws Exception when clipboard is not accessible
+     */
     public static void clearClipboardContent() throws Exception {
         try {
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(EMPTY_CONTENT, EMPTY_CONTENT);
@@ -47,6 +51,11 @@ public final class ClipboardUtils {
         }
     }
 
+    /**
+     * Get text from system clipboard.
+     *
+     * @return the text, or {@code null} if there is no content
+     */
     public static String getClipboardContent() {
         String result = null;
         try {
@@ -55,20 +64,32 @@ public final class ClipboardUtils {
                 result = String.valueOf(contents.getTransferData(DataFlavor.stringFlavor));
             }
         } catch (Throwable throwable) {
-            //ignore
+            // ignore
         }
         return result == null || result.isEmpty() ? null : result;
     }
 
+    /**
+     * Class representing an empty clipboard content. With the help of this
+     * class, the content of clipboard can be cleared.
+     *
+     * @author Gabor_Bata
+     *
+     */
     protected static final class EmptyClipboardContent implements Transferable, ClipboardOwner {
-        @Override
-        public DataFlavor[] getTransferDataFlavors() { return new DataFlavor[0]; }
 
         @Override
-        public boolean isDataFlavorSupported(DataFlavor flavor) { return false; }
+        public DataFlavor[] getTransferDataFlavors() {
+            return new DataFlavor[0];
+        }
 
         @Override
-        public Object getTransferData(DataFlavor flavor) throws UnsupportedOperationException, UnsupportedFlavorException {
+        public boolean isDataFlavorSupported(DataFlavor flavor) {
+            return false;
+        }
+
+        @Override
+        public Object getTransferData(DataFlavor flavor) throws UnsupportedFlavorException {
             throw new UnsupportedFlavorException(flavor);
         }
 

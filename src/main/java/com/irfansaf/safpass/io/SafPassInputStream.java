@@ -1,7 +1,5 @@
 package com.irfansaf.safpass.io;
 
-import com.irfansaf.safpass.ui.SafPassFrame;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -19,14 +17,15 @@ public class SafPassInputStream extends InputStream implements SafPassStream {
 
     public SafPassInputStream(InputStream parent, char[] key) throws IOException {
         this.parent = parent;
-        if ((this).markSupported()) {
+
+        if (this.parent.markSupported()) {
             this.parent.mark(FILE_FORMAT_IDENTIFIER.length + 1);
         }
         byte[] identifier = readBytes(parent, FILE_FORMAT_IDENTIFIER.length);
         int fileVersion = parent.read();
 
         if (!Arrays.equals(FILE_FORMAT_IDENTIFIER, identifier) && this.parent.markSupported()) {
-            // Initial version of SafPass had no file Identifier, We assume version 0
+            // initial version of JPass had no file identifier, we assume version 0
             fileVersion = 0;
             this.parent.reset();
         }
@@ -39,11 +38,6 @@ public class SafPassInputStream extends InputStream implements SafPassStream {
     }
 
     @Override
-    public byte[] getKey() {
-        return generatedKey;
-    }
-
-    @Override
     public int read() throws IOException {
         return parent.read();
     }
@@ -51,6 +45,11 @@ public class SafPassInputStream extends InputStream implements SafPassStream {
     @Override
     public void close() throws IOException {
         parent.close();
+    }
+
+    @Override
+    public byte[] getKey() {
+        return generatedKey;
     }
 
     private byte[] readBytes(InputStream stream, int length) throws IOException {

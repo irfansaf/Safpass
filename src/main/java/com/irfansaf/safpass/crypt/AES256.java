@@ -179,7 +179,7 @@ public final class AES256 {
      * Substitutes all {@code byte}s in a word. The word array will be changed.
      *
      * @param value array in which the first {@code WORD_SIZE} {@code byte}s
-     *              will be substituted. This array will be modified.
+     * will be substituted. This array will be modified.
      * @return returns the modified {@code value}
      */
     private byte[] substituteWord(byte[] value) {
@@ -195,28 +195,28 @@ public final class AES256 {
      * original argument is changed after the method invocation.
      *
      * @param value Array in which the first {@code WORD_SIZE} {@code byte}'s
-     *              will be changed due to the rotation. THe contents of this array is
-     *              changed by this invocation.
+     * will be changed due to the rotation. The contents of this array is
+     * changed by this invocation.
      */
     private byte[] rotate(byte[] value) {
         byte tmp = value[0];
         for (int i = 1; i < WORD_SIZE; ++i) {
-            value[i - 1] = value [i];
+            value[i - 1] = value[i];
         }
         value[WORD_SIZE - 1] = tmp;
         return value;
     }
 
     /**
-     * Expands the key. The incoming key is {@code KEY_SIZE} {@code byte}'s long.
+     * Expands the key. The incoming key is {@code KEY_SIZE} {@code byte}s long.
      * It will be expanded to a length of {@code EXPANDED_KEY_SIZE}
-     * {@code byte}'s. The expanded key will be stored in
+     * {@code byte}s. The expanded key will be stored in
      * {@link AES256#_expandedKey}.
      * <p>
-     *     The encryption and decryption will use the expanded key
+     * The encryption and decryption will use the expanded key.
      * </p>
      *
-     * @param key for the AES algorithm
+     * @param key key for the AES algorithm
      */
     public AES256(byte[] key) {
         this._expandedKey = new byte[EXPANDED_KEY_SIZE];
@@ -241,11 +241,11 @@ public final class AES256 {
     }
 
     /**
-     * Combines the state with the expanded key. The {@code byte}'s will be
+     * Combines the state with the expanded key. The {@code byte}s will be
      * combined by {@code XOR}.
      *
-     * @param index start of the part of the expanded key, that will be used
-     *              the combination
+     * @param index start of the part of the expanded key, that will be used for
+     * the combination
      */
     private void addRoundKey(int index) {
         for (int i = 0; i < BLOCK_SIZE; ++i) {
@@ -302,7 +302,7 @@ public final class AES256 {
     }
 
     /**
-     * Changes all {@code byte}'s in the state by the s-box
+     * Changes all {@code byte}s in the state by the s-box.
      */
     private void substituteState() {
         for (int i = 0; i < BLOCK_SIZE; ++i) {

@@ -96,5 +96,4 @@ public class CryptOutputStream extends OutputStream {
     public void close() throws IOException {
         this._cipher.finishEncryption();
     }
-
 }

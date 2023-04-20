@@ -25,17 +25,11 @@ public class SafPassOutputStream extends OutputStream implements SafPassStream {
         parent.write(FILE_FORMAT_IDENTIFIER);
         parent.write(fileVersionType.getVersion());
 
-        byte[] salt = CryptUtils.generateRandomSalt(fileVersionType.getSaltLength());;
+        byte[] salt = CryptUtils.generateRandomSalt(fileVersionType.getSaltLength());
         if (salt.length > 0) {
             parent.write(salt);
         }
         this.generatedKey = fileVersionType.getKeyGenerator().apply(key, salt);
-
-    }
-
-    @Override
-    public byte[] getKey() {
-        return generatedKey;
     }
 
     @Override
@@ -46,5 +40,10 @@ public class SafPassOutputStream extends OutputStream implements SafPassStream {
     @Override
     public void close() throws IOException {
         parent.close();
+    }
+
+    @Override
+    public byte[] getKey() {
+        return generatedKey;
     }
 }
