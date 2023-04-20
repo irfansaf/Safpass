@@ -26,6 +26,8 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.html.Option;
 
+import static com.irfansaf.safpass.ui.helper.EntryHelper.copyEntryField;
+
 /**
  * A dialog with the entry data.
  *
