@@ -266,7 +266,7 @@ public final class FileHelper {
             @Override
             protected Void doInBackground() throws Exception {
                 try {
-                    parent.getModel().setEntries(EntriesRepository.newInstance(fileName).readDocument());
+                    parent.getModel().setEntries(EntriesRepository.newInstance(fileName, password).readDocument());
                     parent.getModel().setFileName(fileName);
                     parent.getModel().setPassword(password);
                     parent.getSearchPanel().setVisible(false);

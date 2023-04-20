@@ -49,22 +49,28 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
 
     private JCheckBox[] checkBoxes;
     private JCheckBox customSymbolsCheck;
+
     private JTextField customSymbolsField;
     private JTextField passwordField;
+
     private JLabel lengthLabel;
     private JSpinner lengthSpinner;
+
     private JPanel lengthPanel;
     private JPanel charactersPanel;
     private JPanel passwordPanel;
     private JPanel buttonPanel;
+
     private JButton acceptButton;
     private JButton cancelButton;
     private JButton generateButton;
+
     private String generatedPassword;
+
     private final Random random = CryptUtils.newRandomNumberGenerator();
 
     /**
-     * Constructor of GeneratePasswordDialog
+     * Constructor of GeneratePasswordDialog.
      *
      * @param parent JFrame parent component
      */
@@ -74,9 +80,9 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
     }
 
     /**
-     * Constructor of GeneratePasswordDialog
+     * Constructor of GeneratePasswordDialog.
      *
-     * @param parent JFrame parent component
+     * @param parent JDialog parent component
      */
     public GeneratePasswordDialog(JDialog parent) {
         super(parent);
@@ -88,7 +94,8 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
      *
      * @param parent parent component
      * @param showAcceptButton if true then the dialog shows an "Accept" and
-     *                         "Cancel" button, otherwise only a "Close" button
+     * "Cancel" button, otherwise only a "Close" button
+     *
      */
     private void initDialog(final Component parent, final boolean showAcceptButton) {
         setModal(true);
@@ -97,7 +104,7 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
         this.generatedPassword = null;
 
         this.lengthPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
-        this.lengthLabel = new JLabel("Password Length:");
+        this.lengthLabel = new JLabel("Password length:");
         this.lengthPanel.add(this.lengthLabel);
 
         int passwordGenerationLength = Configuration.getInstance().getInteger("default.password.generation.length", 14);
@@ -169,14 +176,13 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
         setResizable(false);
         pack();
         setSize((int) (getWidth() * 1.5), getHeight());
+        setLocationRelativeTo(parent);
         setVisible(true);
     }
 
     /**
      * @see
      * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-     *
-     * @param e the event to be processed
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -196,7 +202,7 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
             }
 
             if (characterSet.isEmpty()) {
-                MessageDialog.showWarningMessage(this, "Cannot generate password.\n Please select a character set.");
+                MessageDialog.showWarningMessage(this, "Cannot generate password.\nPlease select a character set.");
                 return;
             }
 
@@ -213,7 +219,7 @@ public final class GeneratePasswordDialog extends JDialog implements ActionListe
                 return;
             }
             dispose();
-        } else if ("cancel_button".equals(command)){
+        } else if ("cancel_button".equals(command)) {
             dispose();
         }
     }
