@@ -30,7 +30,7 @@ public final class TextComponentFactory {
     }
 
     public  static JPasswordField newPasswordField() {
-        return newPasswordFIeld(false);
+        return newPasswordField(false);
     }
 
     /**
@@ -39,7 +39,7 @@ public final class TextComponentFactory {
      * @param copyEnabled forces the copy of password field content to clipboard
      * @return the new instance
      */
-    public static JPasswordField newPasswordFIeld(boolean copyEnabled) {
+    public static JPasswordField newPasswordField(boolean copyEnabled) {
         JPasswordField passwordField = new CopiablePasswordField(copyEnabled);
         passwordField.addMouseListener(new TextComponentPopupListener());
         TextComponentActionType.bindAllActions(passwordField);
