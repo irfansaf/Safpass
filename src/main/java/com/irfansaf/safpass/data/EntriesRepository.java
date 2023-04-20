@@ -1,10 +1,15 @@
 package com.irfansaf.safpass.data;
 
+import com.irfansaf.safpass.crypt.io.CryptInputStream;
+import com.irfansaf.safpass.crypt.io.CryptOutputStream;
+import com.irfansaf.safpass.io.SafPassInputStream;
+import com.irfansaf.safpass.io.SafPassOutputStream;
 import com.irfansaf.safpass.xml.bind.Entries;
 import com.irfansaf.safpass.xml.converter.XmlConverter;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 
 import static com.irfansaf.safpass.util.StringUtils.stripString;
 
@@ -71,7 +76,7 @@ public final class EntriesRepository {
             if (this.key == null) {
                 inputStream = new BufferedInputStream(new FileInputStream(this.fileName));
             } else {
-                //
+                inputStream = new GZIPInputStream(new CryptInputStream(new SafPassInputStream(new BufferedInputStream(new FileInputStream(this.fileName)), this.key)));
             }
             entries = CONVERTER.read(inputStream);
         } catch (IOException e) {
@@ -97,7 +102,7 @@ public final class EntriesRepository {
             if (this.key == null) {
                 outputStream = new BufferedOutputStream(new FileOutputStream(this.fileName));
             } else {
-                //
+                outputStream = new GZIPOutputStream(new CryptOutputStream(new SafPassOutputStream(new BufferedOutputStream(new FileOutputStream(this.fileName)), this.key)));
             }
             CONVERTER.write(document, outputStream);
         } catch (Exception e) {
