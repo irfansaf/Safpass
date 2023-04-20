@@ -83,7 +83,7 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.originalEcho = this.passwordField.getEchoChar();
         this.repeatField = TextComponentFactory.newPasswordField(true);
 
-        this.showButton = new JToggleButton("Show", MessageDialog.getIcon("generate"));
+        this.showButton = new JToggleButton("Show", MessageDialog.getIcon("show"));
         this.showButton.setActionCommand("show_button");
         this.showButton.setMnemonic(KeyEvent.VK_S);
         this.showButton.addActionListener(this);
@@ -102,8 +102,9 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.passwordButtonPanel.add(this.copyButton);
         SpringUtilities.makeCompactGrid(this.passwordButtonPanel,
                 1, 3, // rows, columns
-                0,0, // initX, initY
+                0, 0, // initX, initY
                 5, 0); // xPad, yPad
+
         this.fieldPanel = new JPanel(new SpringLayout());
         this.fieldPanel.add(new JLabel("Title:"));
         this.fieldPanel.add(this.titleField);
@@ -129,7 +130,7 @@ public class EntryDialog extends JDialog implements ActionListener {
 
         this.notesPanel = new JPanel(new BorderLayout(5, 5));
         this.notesPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
-        this.notesPanel.add(new JLabel("Notes."), BorderLayout.NORTH);
+        this.notesPanel.add(new JLabel("Notes:"), BorderLayout.NORTH);
         this.notesPanel.add(new JScrollPane(this.notesField), BorderLayout.CENTER);
 
         this.okButton = new JButton("OK", MessageDialog.getIcon("accept"));
@@ -147,7 +148,7 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.buttonPanel.add(this.cancelButton);
 
         getContentPane().add(this.fieldPanel, BorderLayout.NORTH);
-        getContentPane().add(this.notesField, BorderLayout.CENTER);
+        getContentPane().add(this.notesPanel, BorderLayout.CENTER);
         getContentPane().add(this.buttonPanel, BorderLayout.SOUTH);
 
         fillDialogFromEntry(entry);
@@ -168,7 +169,7 @@ public class EntryDialog extends JDialog implements ActionListener {
                 MessageDialog.showWarningMessage(this, "Please fill the title field.");
                 return;
             } else if (!checkEntryTitle()) {
-                MessageDialog.showInformationMessage(this, "Title is already exist,\nplease enter a different title.");
+                MessageDialog.showWarningMessage(this, "Title is already exists,\nplease enter a different title.");
                 return;
             } else if (!Arrays.equals(this.passwordField.getPassword(), this.repeatField.getPassword())) {
                 MessageDialog.showWarningMessage(this, "Password and repeated passwords are not identical.");
@@ -251,7 +252,7 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.userField.setText(entry.getUser() == null ? "" : entry.getUser());
         this.passwordField.setText(entry.getPassword() == null ? "" : entry.getPassword());
         this.repeatField.setText(entry.getPassword() == null ? "" : entry.getPassword());
-        this.urlField.setText(entry.getUser() == null ? "" : entry.getUser());
+        this.urlField.setText(entry.getUrl() == null ? "" : entry.getUrl());
         this.notesField.setText(entry.getNotes() == null ? "" : entry.getNotes());
         this.notesField.setCaretPosition(0);
     }
