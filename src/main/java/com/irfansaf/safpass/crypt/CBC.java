@@ -196,4 +196,31 @@ public class CBC {
         this._output.write(this._outBuffer);
         this._output.close();
     }
+
+    /**
+     * Finishes the decryption process.
+     *
+     * @throws DecryptException if the last block is no legal conclusion of the
+     * stream
+     * @throws IOException if the writing fails
+     */
+    public void finishDecryption() throws DecryptException, IOException {
+        if (this._overflowUsed != 0) {
+            throw new DecryptException();
+        }
+        if (!this._outBufferUsed) {
+            return;
+        }
+
+        int pad = this._outBuffer[BLOCK_SIZE - 1] & 0xff;
+        if (pad <= 0 || pad > BLOCK_SIZE) {
+            throw new DecryptException();
+        }
+
+        int left = BLOCK_SIZE - pad;
+        if (left > 0) {
+            this._output.write(this._outBuffer, 0, left);
+        }
+        this._output.close();
+    }
 }
