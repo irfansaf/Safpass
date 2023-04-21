@@ -13,33 +13,52 @@ import javax.crypto.spec.PBEKeySpec;
 public final class CryptUtils {
 
     private CryptUtils() {
-        // Utility Class
+        // utility class
     }
 
     /**
-     * Generates key with {@link #getPBKDF2Key(char[], byte[], int) with default iterations}
+     * Generates key with {@link #getPBKDF2Key(char[], byte[], int)} with
+     * default iterations.
      *
      * <p>
-     *     In 2021, OWASP recommend to use 310,000 iterations for
-     *     PBKDF2-HMAC-SHA256
+     * In 2021, OWASP recommended to use 310,000 iterations for
+     * PBKDF2-HMAC-SHA256
+     * https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
      * </p>
-     * @param text
-     * @param salt
-     * @return
+     *
+     * @param text password text
+     * @param salt the salt
+     * @return the generated key
      */
-    public static byte[] getPBKDF2KeyWithDefaultIterations(final char[] text,final byte[] salt) {
-        return getPBKDF2Key(text, salt, 310_100);
+    public static byte[] getPBKDF2KeyWithDefaultIterations(final char[] text, final byte[] salt) {
+        return getPBKDF2Key(text, salt, 310_000);
     }
 
     /**
      * Generates key with PBKDF2 (Password-Based Key Derivation Function 2).
+     * <p>
+     * When the standard was written in the year 2000 the recommended minimum
+     * number of iterations was 1,000, but the parameter is intended to be
+     * increased over time as CPU speeds increase. A Kerberos standard in 2005
+     * recommended 4,096 iterations; Apple reportedly used 2,000 for iOS 3, and
+     * 10,000 for iOS 4; while LastPass in 2011 used 5,000 iterations for
+     * JavaScript clients and 100,000 iterations for server-side hashing. In
+     * 2021, OWASP recommended to use 310,000 iterations for PBKDF2-HMAC-SHA256.
+     * </p>
+     * <p>
+     * Having a salt added to the password reduces the ability to use
+     * precomputed hashes (rainbow tables) for attacks, and means that multiple
+     * passwords have to be tested individually, not all at once. The standard
+     * recommends a salt length of at least 64 bits. The US National Institute
+     * of Standards and Technology recommends a salt length of 128 bits.
+     * </p>
      *
-     * @param text
-     * @param salt
-     * @param iteration
-     * @return
+     * @param text password text
+     * @param salt the salt
+     * @param iteration number of iterations
+     * @return the generated key
      */
-    private static byte[] getPBKDF2Key(final char[] text, final byte[] salt, final int iteration) {
+    public static byte[] getPBKDF2Key(final char[] text, final byte[] salt, final int iteration) {
         try {
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
             KeySpec spec = new PBEKeySpec(text, salt, iteration, 256);
@@ -51,7 +70,7 @@ public final class CryptUtils {
     }
 
     /**
-     * Calculate SHA-256 hash, with 1000 iterations by default
+     * Calculate SHA-256 hash, with 1000 iterations by default.
      *
      * @param text password text
      * @return hash of the password
@@ -60,27 +79,45 @@ public final class CryptUtils {
         return getSha256Hash(text, 1000);
     }
 
-    private static byte[] getSha256Hash(final char[] text) {
+    /**
+     * Calculate SHA-256 hash.
+     *
+     * @param text password text
+     * @return hash of the password
+     */
+    public static byte[] getSha256Hash(final char[] text) {
         return getSha256Hash(text, 0);
     }
 
     /**
-     * Calculate SHA-256 Hash.
+     * Calculate SHA-256 hash.
+     *
+     * <p>
+     * To slow down the computation it is recommended to iterate the hash
+     * operation {@code n} times. While hashing the password {@code n} times
+     * does slow down hashing for both attackers and typical users, typical
+     * users don't really notice it being that hashing is such a small
+     * percentage of their total time interacting with the system. On the other
+     * hand, an attacker trying to crack passwords spends nearly 100% of their
+     * time hashing so hashing {@code n} times gives the appearance of slowing
+     * the attacker down by a factor of {@code n} while not noticeably affecting
+     * the typical user.
+     * </p>
      *
      * @param text password text
-     * @param iteration number of iteration
+     * @param iteration number of iterations
      * @return hash of the password
      */
     private static byte[] getSha256Hash(final char[] text, final int iteration) {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-            messageDigest.reset();
-            // messageDigest.update(salt);
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.reset();
+            // md.update(salt);
             byte[] bytes = new String(text).getBytes(StandardCharsets.UTF_8);
-            byte[] digest = messageDigest.digest(bytes);
+            byte[] digest = md.digest(bytes);
             for (int i = 0; i < iteration; i++) {
-                messageDigest.reset();
-                digest = messageDigest.digest(digest);
+                md.reset();
+                digest = md.digest(digest);
             }
             return digest;
         } catch (GeneralSecurityException e) {
@@ -88,12 +125,6 @@ public final class CryptUtils {
         }
     }
 
-    /**
-     * Generates a random byte array of the specified length to be used as a salt for cryptographic operations.
-     *
-     * @param saltLength The desired length of the salt in bytes.
-     * @return A byte array containing a random salt of the specified length.
-     */
     public static byte[] generateRandomSalt(int saltLength) {
         byte[] salt = new byte[saltLength];
         if (saltLength > 0) {
@@ -106,11 +137,12 @@ public final class CryptUtils {
      * Get random number generator.
      *
      * <p>
-     *      it tries to return with a nondeterministic secure random generator first,
-     *      if it was unsuccessfully for some reason, it returns with the uniform random generator.
+     * It tries to return with a nondeterministic secure random generator first,
+     * if it was unsuccessful for some reason, it returns with the uniform
+     * random generator.
      * </p>
      *
-     * @return the random number generator
+     * @return the random number generator.
      */
     public static Random newRandomNumberGenerator() {
         Random ret;

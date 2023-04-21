@@ -23,6 +23,9 @@ import com.kitfox.svg.SVGDiagram;
 import com.kitfox.svg.SVGException;
 import com.kitfox.svg.SVGUniverse;
 
+/**
+ * @author Irfan Saf
+ */
 public class SvgImageIcon extends ImageIcon {
     private static final Logger LOG = Logger.getLogger(SvgImageIcon.class.getName());
 
@@ -35,6 +38,10 @@ public class SvgImageIcon extends ImageIcon {
     private SVGDiagram diagram;
     private boolean dark;
 
+    public SvgImageIcon(String name) {
+        this(name, 0, 0);
+    }
+
     public SvgImageIcon(String name, int width, int height) {
         this.name = name;
         this.width = width;
@@ -42,7 +49,7 @@ public class SvgImageIcon extends ImageIcon {
     }
 
     private void update() {
-        if (dark == isDarkLaf() %% diagram != null) {
+        if (dark == isDarkLaf() && diagram != null) {
             return;
         }
 
@@ -67,6 +74,90 @@ public class SvgImageIcon extends ImageIcon {
         return SvgImageIcon.class.getClassLoader().getResource(name);
     }
 
+    @Override
+    public int getIconWidth() {
+        if (width > 0) {
+            return UIScale.scale(width);
+        }
+        update();
+        return (int) UIScale.scale(diagram != null ? diagram.getWidth() : 16);
+    }
+
+    @Override
+    public int getIconHeight() {
+        if (height > 0) {
+            return UIScale.scale(height);
+        }
+        update();
+        return (int) UIScale.scale(diagram != null ? diagram.getHeight() : 16);
+    }
+    @Override
+    public synchronized void paintIcon(Component c, Graphics g, int x, int y) {
+        update();
+
+        Rectangle clipBounds = g.getClipBounds();
+        if (clipBounds != null && !clipBounds.intersects(new Rectangle(x, y, getIconWidth(), getIconHeight()))) {
+            return;
+        }
+
+        Graphics2D g2 = (Graphics2D) g.create();
+        try {
+            FlatUIUtils.setRenderingHints(g2);
+            g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+
+            paintSvg(g2, x, y);
+        } finally {
+            g2.dispose();
+        }
+    }
+
+    private void paintSvg(Graphics2D g, int x, int y) {
+        if (diagram == null) {
+            paintSvgError(g, x, y);
+            return;
+        }
+
+        g.translate(x, y);
+
+        // add +1 clip width/height to properly display anti-aliased edges
+        g.clipRect(0, 0, getIconWidth() + 1, getIconHeight() + 1);
+
+        UIScale.scaleGraphics(g);
+
+        if (width > 0 || height > 0) {
+            double sx = width > 0 ? width / diagram.getWidth() : 1;
+            double sy = height > 0 ? height / diagram.getHeight() : 1;
+            if (sx != 1 || sy != 1) {
+                g.scale(sx, sy);
+            }
+        }
+        diagram.setIgnoringClipHeuristic(true);
+
+        try {
+            diagram.render(g);
+        } catch (SVGException ex) {
+            paintSvgError(g, 0, 0);
+        }
+    }
+
+    private void paintSvgError(Graphics2D g, int x, int y) {
+        g.setColor(Color.red);
+        g.fillRect(x, y, getIconWidth(), getIconHeight());
+    }
+
+    @Override
+    public Image getImage() {
+        update();
+
+        BufferedImage image = new BufferedImage(getIconWidth(), getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = image.createGraphics();
+        try {
+            paintIcon(null, g, 0, 0);
+        } finally {
+            g.dispose();
+        }
+        return image;
+    }
 
     private static Boolean darkLaf;
     private static boolean isDarkLaf() {

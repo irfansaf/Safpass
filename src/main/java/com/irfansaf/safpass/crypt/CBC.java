@@ -17,6 +17,7 @@ public class CBC {
      * size of a block in {@code byte}'s
      */
     private static final int BLOCK_SIZE = 16;
+
     /**
      * cipher
      */
@@ -33,7 +34,7 @@ public class CBC {
     private byte[] _buffer = null;
 
     /**
-     * Temporary block.
+     * temporary block.
      */
     private final byte[] _tmp;
 
@@ -48,12 +49,12 @@ public class CBC {
     private boolean _outBufferUsed = false;
 
     /**
-     * Temporary buffer to accumulate whole blocks of data
+     * temporary buffer to accumulate whole blocks of data
      */
     private final byte[] _overflow;
 
     /**
-     * How many {@code byte}s of {@link CBC#_overflow} are used?
+     * How many {@code byte}s of {@link CBCc#_overflow} are used?
      */
     private int _overflowUsed;
 
@@ -80,10 +81,10 @@ public class CBC {
     }
 
     /**
-     * Encrypts a block. {@link CBC#_current} will be modified
+     * Encrypts a block. {@link CBC#_current} will be modified.
      *
      * @param inBuffer array containing the input block
-     * @param outBuffer storage of the encrpted block
+     * @param outBuffer storage of the encrypted block
      */
     private void encryptBlock(byte[] inBuffer, byte[] outBuffer) {
         for (int i = 0; i < BLOCK_SIZE; ++i) {

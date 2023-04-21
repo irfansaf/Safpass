@@ -113,7 +113,7 @@ public class SearchPanel extends JPanel implements ActionListener {
      *
      * @return get search criteria, non null
      */
-    public String getSearhCriteria() {
+    public String getSearchCriteria() {
         String criteria = "";
         if (isVisible() && isEnabled()) {
             criteria = this.criteriaField.getText();

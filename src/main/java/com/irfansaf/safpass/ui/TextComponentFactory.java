@@ -12,12 +12,19 @@ public final class TextComponentFactory {
         // not intended to be instantiated
     }
 
+    /**
+     * Creates a new {@link JTextField} instance with a context pop-up menu by
+     * default.
+     *
+     * @return the new instance
+     */
     public static JTextField newTextField() {
         return newTextField(null);
     }
 
     /**
-     * Creates a new {@link JTextField} instance with a context pop-up menu by default
+     * Creates a new {@link JTextField} instance with a context pop-up menu by
+     * default.
      *
      * @param text the initial text
      * @return the new instance
@@ -29,12 +36,19 @@ public final class TextComponentFactory {
         return textField;
     }
 
-    public  static JPasswordField newPasswordField() {
+    /**
+     * Creates a new {@link JPasswordField} instance with a context pop-up menu
+     * by default.
+     *
+     * @return the new instance
+     */
+    public static JPasswordField newPasswordField() {
         return newPasswordField(false);
     }
 
     /**
-     * Creates a new {@link JPasswordField} instance with a context popup menu by default
+     * Creates a new {@link JPasswordField} instance with a context pop-up menu
+     * by default.
      *
      * @param copyEnabled forces the copy of password field content to clipboard
      * @return the new instance
@@ -43,11 +57,12 @@ public final class TextComponentFactory {
         JPasswordField passwordField = new CopiablePasswordField(copyEnabled);
         passwordField.addMouseListener(new TextComponentPopupListener());
         TextComponentActionType.bindAllActions(passwordField);
-        return  passwordField;
+        return passwordField;
     }
 
     /**
-     * Creates a new {@link JTextArea} instnace with a context popup menu by default
+     * Creates a new {@link JTextArea} instance with a context pop-up menu by
+     * default.
      *
      * @return the new instance
      */
@@ -56,7 +71,8 @@ public final class TextComponentFactory {
     }
 
     /**
-     * Creates a new {@link JTextArea} instance with a context popup menu by default
+     * Creates a new {@link JTextArea} instance with a context pop-up menu by
+     * default.
      *
      * @param text the initial text
      * @return the new instance

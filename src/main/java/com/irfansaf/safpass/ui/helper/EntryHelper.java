@@ -44,7 +44,7 @@ public final class EntryHelper {
             showWarningMessage(parent, "Please select an entry.");
             return;
         }
-        String title = (String) parent.getEntryTitleTable().getValueAt(parent.getEntryTitleTable().getSelectedRow(), 0);;
+        String title = (String) parent.getEntryTitleTable().getValueAt(parent.getEntryTitleTable().getSelectedRow(), 0);
         Entry originalEntry = parent.getModel().getEntryByTitle(title);
         EntryDialog dialog = new EntryDialog(parent, "Duplicate Entry", originalEntry, true);
         dialog.getModifiedEntry().ifPresent(entry -> {
@@ -84,7 +84,7 @@ public final class EntryHelper {
      * @param parent component
      */
     public static void addEntry(SafPassFrame parent) {
-        EntryDialog dialog = new EntryDialog(parent, "Add new Entry", null, true);
+        EntryDialog dialog = new EntryDialog(parent, "Add New Entry", null, true);
         dialog.getModifiedEntry().ifPresent(entry -> {
             parent.getModel().getEntries().getEntry().add(entry);
             parent.getModel().setModified(true);
@@ -99,7 +99,7 @@ public final class EntryHelper {
      * @param parent component
      * @return the entry or null
      */
-    public static Entry getSelectedEntry(SafPassFrame parent){
+    public static Entry getSelectedEntry(SafPassFrame parent) {
         if (parent.getEntryTitleTable().getSelectedRow() == -1) {
             showWarningMessage(parent, "Please select an entry.");
             return null;

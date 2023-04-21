@@ -16,7 +16,11 @@ import javax.swing.JComponent;
 import javax.swing.KeyStroke;
 
 import static com.irfansaf.safpass.ui.MessageDialog.getIcon;
-import static com.irfansaf.safpass.ui.helper.FileHelper.*;
+import static com.irfansaf.safpass.ui.helper.FileHelper.exportFile;
+import static com.irfansaf.safpass.ui.helper.FileHelper.importFile;
+import static com.irfansaf.safpass.ui.helper.FileHelper.openFile;
+import static com.irfansaf.safpass.ui.helper.FileHelper.saveFile;
+import static com.irfansaf.safpass.ui.helper.FileHelper.createNew;
 import static javax.swing.KeyStroke.getKeyStroke;
 import static java.awt.event.InputEvent.CTRL_DOWN_MASK;
 import static java.awt.event.InputEvent.ALT_DOWN_MASK;
@@ -24,7 +28,7 @@ import static java.awt.event.InputEvent.ALT_DOWN_MASK;
 public enum MenuActionType {
     NEW_FILE(new AbstractMenuAction("New", getIcon("new"), getKeyStroke(KeyEvent.VK_N, CTRL_DOWN_MASK)) {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent ev) {
             createNew(SafPassFrame.getInstance());
         }
     }),
@@ -89,17 +93,17 @@ public enum MenuActionType {
     ABOUT(new AbstractMenuAction("About SafPass...", getIcon("info"), getKeyStroke(KeyEvent.VK_F1, 0)) {
         @Override
         public void actionPerformed(ActionEvent ev) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("<b>" + SafPassFrame.PROGRAM_NAME + "</b>\n");
-            stringBuilder.append("version: " + SafPassFrame.PROGRAM_VERSION + "\n");
-            stringBuilder.append("Copyright &copy; 2023 Irfan Saf\n");
-            stringBuilder.append("\n");
-            stringBuilder.append("Java version: ").append(System.getProperties().getProperty("java.version")).append("\n");
-            stringBuilder.append(System.getProperties().getProperty("java.vendor"));
-            MessageDialog.showInformationMessage(SafPassFrame.getInstance(), stringBuilder.toString());
+            StringBuilder sb = new StringBuilder();
+            sb.append("<b>" + SafPassFrame.PROGRAM_NAME + "</b>\n");
+            sb.append("version: " + SafPassFrame.PROGRAM_VERSION + "\n");
+            sb.append("Copyright &copy; 2023 Irfan Saf\n");
+            sb.append("\n");
+            sb.append("Java version: ").append(System.getProperties().getProperty("java.version")).append("\n");
+            sb.append(System.getProperties().getProperty("java.vendor"));
+            MessageDialog.showInformationMessage(SafPassFrame.getInstance(), sb.toString());
         }
     }),
-    LICENSE(new AbstractMenuAction("License", getIcon("license"),null) {
+    LICENSE(new AbstractMenuAction("License", getIcon("license"), null) {
         @Override
         public void actionPerformed(ActionEvent ev) {
             MessageDialog.showTextFile(SafPassFrame.getInstance(), "License", "license.txt");
@@ -141,11 +145,11 @@ public enum MenuActionType {
     }),
     COPY_USER(new AbstractMenuAction("Copy User Name", getIcon("user"), getKeyStroke(KeyEvent.VK_B, CTRL_DOWN_MASK)) {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent ev) {
             SafPassFrame parent = SafPassFrame.getInstance();
             Entry entry = EntryHelper.getSelectedEntry(parent);
             if (entry != null) {
-                EntryHelper.copyEntryField(parent, entry.getUrl());
+                EntryHelper.copyEntryField(parent, entry.getUser());
             }
         }
     }),
@@ -182,7 +186,7 @@ public enum MenuActionType {
     }
 
     public String getName() {
-        return this.name();
+        return this.name;
     }
 
     public AbstractMenuAction getAction() {

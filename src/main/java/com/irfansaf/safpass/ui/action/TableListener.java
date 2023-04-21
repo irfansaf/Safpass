@@ -28,15 +28,22 @@ public class TableListener extends MouseAdapter{
     }
 
     /**
-     * Handle pop-up
+     * Handle pop-up.
      *
-     * @param evt the event to be processed
+     * @param evt the mouse event
+     * @see java.awt.event.MouseAdapter#mousePressed(java.awt.event.MouseEvent)
      */
     @Override
     public void mousePressed(MouseEvent evt) {
         checkPopup(evt);
     }
 
+    /**
+     * Handle pop-up.
+     *
+     * @param evt the mouse event
+     * @see java.awt.event.MouseAdapter#mouseReleased(java.awt.event.MouseEvent)
+     */
     @Override
     public void mouseReleased(MouseEvent evt) {
         checkPopup(evt);

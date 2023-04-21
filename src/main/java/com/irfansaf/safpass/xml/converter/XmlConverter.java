@@ -14,10 +14,6 @@ public class XmlConverter<T> {
     private final Class<T> documentClass;
     private final XmlMapper mapper;
 
-    /**
-     *
-     * @param documentClass
-     */
     public XmlConverter(Class<T> documentClass) {
         this.documentClass = documentClass;
         JacksonXmlModule module = new JacksonXmlModule();
@@ -32,12 +28,19 @@ public class XmlConverter<T> {
      *
      * @param document the document object which represents the XML document
      * @param outputStream the output stream
-     * @throws IOException if any error occured
+     * @throws IOException if any error occurred
      */
     public void write(T document, OutputStream outputStream) throws IOException {
         mapper.writeValue(outputStream, document);
     }
 
+    /**
+     * Maps the given input stream to a document object.
+     *
+     * @param inputStream the input stream
+     * @return the document object
+     * @throws IOException if any error occurred
+     */
     public T read(InputStream inputStream) throws IOException {
         return mapper.readValue(inputStream, documentClass);
     }

@@ -10,11 +10,13 @@ import java.awt.event.WindowEvent;
  *
  * @author Irfan Saf
  */
-public class CloseListener extends WindowAdapter{
+public class CloseListener extends WindowAdapter {
 
     /**
      * Calls the {@code exitFrame} method of main frame.
-     * @param event the event to be processed
+     *
+     * @see
+     * java.awt.event.WindowAdapter#windowClosing(java.awt.event.WindowEvent)
      */
     @Override
     public void windowClosing(WindowEvent event) {

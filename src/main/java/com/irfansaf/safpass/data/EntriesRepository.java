@@ -35,7 +35,13 @@ public final class EntriesRepository {
      */
     private static final XmlConverter<Entries> CONVERTER = new XmlConverter<>(Entries.class);
 
-    public EntriesRepository(String fileName, final char[] key) {
+    /**
+     * Creates a DocumentRepository instance.
+     *
+     * @param fileName file name
+     * @param key key for encryption
+     */
+    private EntriesRepository(final String fileName, final char[] key) {
         this.fileName = fileName;
         this.key = key;
     }
@@ -43,7 +49,7 @@ public final class EntriesRepository {
     /**
      * Creates a document repository with no encryption.
      *
-     * @param fileName
+     * @param fileName file name
      * @return a new DocumentHelper object
      */
     public static EntriesRepository newInstance(final String fileName) {
@@ -51,10 +57,10 @@ public final class EntriesRepository {
     }
 
     /**
-     * Creates a document repository with encryption
+     * Creates a document repository with encryption.
      *
-     * @param fileName
-     * @param key for encryption
+     * @param fileName file name
+     * @param key key for encryption
      * @return a new DocumentHelper object
      */
     public static EntriesRepository newInstance(final String fileName, final char[] key) {
@@ -65,8 +71,9 @@ public final class EntriesRepository {
      * Reads and XML file to an {@link Entries} object.
      *
      * @return the document
-     * @throws IOException when I/O error occured (including incorrect password
-     * or file format issues)
+     * @throws FileNotFoundException if file not exists
+     * @throws IOException when I/O error occurred (including incorrect
+     * password, or file format issues)
      * @throws DocumentProcessException when document could not be read
      */
     public Entries readDocument() throws IOException, DocumentProcessException {
@@ -80,6 +87,8 @@ public final class EntriesRepository {
             }
             entries = CONVERTER.read(inputStream);
         } catch (IOException e) {
+            throw e;
+        } catch (Exception e) {
             throw new DocumentProcessException(stripString(e.getMessage()));
         } finally {
             if (inputStream != null) {
@@ -94,7 +103,6 @@ public final class EntriesRepository {
      *
      * @param document the document
      * @throws DocumentProcessException when document could not be saved
-     * @throws IOException when document could not be saved
      */
     public void writeDocument(final Entries document) throws DocumentProcessException, IOException {
         OutputStream outputStream = null;
@@ -113,6 +121,4 @@ public final class EntriesRepository {
             }
         }
     }
-
-
 }

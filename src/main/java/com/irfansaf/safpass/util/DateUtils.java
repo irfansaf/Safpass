@@ -14,7 +14,7 @@ public final class DateUtils {
     private static final Logger LOG = Logger.getLogger(DateUtils.class.getName());
 
     private DateUtils() {
-        // Utility Class
+        // utility class
     }
 
     public static DateTimeFormatter createFormatter(String format) {
@@ -34,7 +34,7 @@ public final class DateUtils {
             dateTime = LocalDateTime.parse(dateString, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         } catch (DateTimeParseException | NullPointerException e) {
             try {
-                // Fallback to epoch timestamp
+                // fallback to epoch timestamp
                 Date date = new Date(Long.parseLong(dateString));
                 dateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
             } catch (NumberFormatException | DateTimeParseException | NullPointerException ex) {

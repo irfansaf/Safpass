@@ -40,23 +40,25 @@ public final class SafPassFrame extends JFrame {
     private static final Logger LOG = Logger.getLogger(SafPassFrame.class.getName());
 
     private static SafPassFrame instance;
-    public static final String PROGRAM_NAME = "Safpass Password Manager";
+
+    public static final String PROGRAM_NAME = "SafPass Password Manager";
     public static final String PROGRAM_VERSION = "1.0.0-SNAPSHOT";
 
+    private final JPopupMenu popup;
     private final JPanel topContainerPanel;
     private final JMenuBar safpassMenuBar;
+    private final SearchPanel searchPanel;
     private final JMenu fileMenu;
     private final JMenu editMenu;
     private final JMenu toolsMenu;
     private final JMenu helpMenu;
+    private final JToolBar toolBar;
     private final JScrollPane scrollPane;
-    private JToolBar toolBar;
-    private final SearchPanel searchPanel;
-    private volatile boolean processing = false;
-    private final EntryDetailsTable  entryDetailsTable;
+
+    private final EntryDetailsTable entryDetailsTable;
+    private final DataModel model = DataModel.getInstance();
     private final StatusPanel statusPanel;
-    private JPopupMenu popup;
-    private DataModel model = DataModel.getInstance();
+    private volatile boolean processing = false;
 
     private SafPassFrame(String fileName) {
         try {
@@ -68,10 +70,20 @@ public final class SafPassFrame extends JFrame {
         }
 
         this.toolBar = new JToolBar();
-        this.toolBar.setFloatable(true);
+        this.toolBar.setFloatable(false);
         this.toolBar.add(MenuActionType.NEW_FILE.getAction());
         this.toolBar.add(MenuActionType.OPEN_FILE.getAction());
         this.toolBar.add(MenuActionType.SAVE_FILE.getAction());
+        this.toolBar.addSeparator();
+        this.toolBar.add(MenuActionType.ADD_ENTRY.getAction());
+        this.toolBar.add(MenuActionType.EDIT_ENTRY.getAction());
+        this.toolBar.add(MenuActionType.DUPLICATE_ENTRY.getAction());
+        this.toolBar.add(MenuActionType.DELETE_ENTRY.getAction());
+        this.toolBar.addSeparator();
+        this.toolBar.add(MenuActionType.COPY_URL.getAction());
+        this.toolBar.add(MenuActionType.COPY_USER.getAction());
+        this.toolBar.add(MenuActionType.COPY_PASSWORD.getAction());
+        this.toolBar.add(MenuActionType.CLEAR_CLIPBOARD.getAction());
         this.toolBar.addSeparator();
         this.toolBar.add(MenuActionType.ABOUT.getAction());
         this.toolBar.add(MenuActionType.EXIT.getAction());
@@ -120,6 +132,7 @@ public final class SafPassFrame extends JFrame {
         this.toolsMenu = new JMenu("Tools");
         this.toolsMenu.setMnemonic(KeyEvent.VK_T);
         this.toolsMenu.add(MenuActionType.GENERATE_PASSWORD.getAction());
+        this.toolsMenu.add(MenuActionType.CLEAR_CLIPBOARD.getAction());
         this.safpassMenuBar.add(this.toolsMenu);
 
         this.helpMenu = new JMenu("Help");
@@ -162,7 +175,7 @@ public final class SafPassFrame extends JFrame {
         setVisible(true);
         FileHelper.openFileInBackground(fileName, this);
 
-        // Set focus on the list for easier keyboard navigation
+        // set focus to the list for easier keyboard navigation
         this.entryDetailsTable.requestFocusInWindow();
     }
 
@@ -221,7 +234,7 @@ public final class SafPassFrame extends JFrame {
         this.entryDetailsTable.clear();
         List<Entry> entries = new ArrayList<>(this.model.getEntries().getEntry());
         Collections.sort(entries, Comparator.comparing(Entry::getTitle, String.CASE_INSENSITIVE_ORDER));
-        String searchCriteria = this.searchPanel.getSearhCriteria();
+        String searchCriteria = this.searchPanel.getSearchCriteria();
         entries.stream()
                 .filter(entry -> searchCriteria.isEmpty() || entry.getTitle().toLowerCase().contains(searchCriteria.toLowerCase()))
                 .forEach(this.entryDetailsTable::addRow);
@@ -229,18 +242,18 @@ public final class SafPassFrame extends JFrame {
         if (selectTitle != null) {
             int rowCount = this.entryDetailsTable.getModel().getRowCount();
             for (int rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-                String title = String.valueOf(this.entryDetailsTable.getModel());
+                String title = String.valueOf(this.entryDetailsTable.getModel().getValueAt(rowIndex, 0));
                 if (selectTitle.equals(title)) {
                     this.entryDetailsTable.setRowSelectionInterval(rowIndex, rowIndex);
                     break;
                 }
             }
+        }
 
-            if (searchCriteria.isEmpty()) {
-                this.statusPanel.setText("Entries count: " + entries.size());
-            } else {
-                this.statusPanel.setText("Entries found: " + this.entryDetailsTable.getRowCount() + " / " + entries.size());
-            }
+        if (searchCriteria.isEmpty()) {
+            this.statusPanel.setText("Entries count: " + entries.size());
+        } else {
+            this.statusPanel.setText("Entries found: " + this.entryDetailsTable.getRowCount() + " / " + entries.size());
         }
     }
 
@@ -265,7 +278,7 @@ public final class SafPassFrame extends JFrame {
         if (this.model.isModified()) {
             int option = showQuestionMessage(this, FileHelper.SAVE_MODIFIED_QUESTION_MESSAGE, YES_NO_CANCEL_OPTION);
             if (option == YES_OPTION) {
-                FileHelper.saveFile(this,false, () -> System.exit(0));
+                FileHelper.saveFile(this, false, () -> System.exit(0));
                 return;
             } else if (option != NO_OPTION) {
                 return;

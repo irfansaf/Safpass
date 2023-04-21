@@ -23,7 +23,7 @@ public final class StringUtils {
         }
         StringBuilder out = new StringBuilder();
         char current;
-        for (int i = 1; i < in.length(); i++) {
+        for (int i = 0; i < in.length(); i++) {
             current = in.charAt(i);
             if ((current == 0x9) || (current == 0xA) || (current == 0xD)
                     || ((current >= 0x20) && (current <= 0xD7FF))

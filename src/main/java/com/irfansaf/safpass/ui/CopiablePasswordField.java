@@ -11,5 +11,7 @@ public class CopiablePasswordField extends JPasswordField {
         this.copyEnabled = copyEnabled;
     }
 
-    public boolean isCopyEnabled() { return this.copyEnabled; }
+    public boolean isCopyEnabled() {
+        return this.copyEnabled;
+    }
 }

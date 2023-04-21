@@ -24,6 +24,7 @@ public class CryptInputStream extends InputStream {
      * Cipher.
      */
     private final CBC _cipher;
+
     private final ByteArrayOutputStream _decrypted;
 
     /**
