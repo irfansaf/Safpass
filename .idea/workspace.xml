@@ -1,110 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="com.irfansaf.safpass.SAFPASS.main:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="BugFixing EntryDialog and EntryHelper">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/128px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/128px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/16px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/16px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/256px(black).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/256px(black).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/256px(white).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/256px(white).svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/256px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/256px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/32px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/32px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/48px.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/48px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/48px.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/bannerReadMe.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/jpass-capture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype(black)-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype(black)-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype(white)-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype(white)-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype1(black)-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype1(black)-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype1(white)-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype1(white)-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype1-01.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/logotype1-01.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/accept.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/accept_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/cancel.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/cancel_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/clear.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/clear_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/close.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/close_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_error.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_error_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_info.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_info_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_lock.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_lock_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_question.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_question_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_warning.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/dialog_warning_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_delete.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_delete_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_duplicate.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_duplicate_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_edit.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_edit_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_new.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/entry_new_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/exit.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/exit_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/export.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/export_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/find.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/find_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/generate.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/generate_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/import.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/import_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/info.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/info_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/keyring.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/keyring_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/license.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/license_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/lock.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/lock_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/new.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/new_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/open.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/open_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/safpass.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/save.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/save_as.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/save_as_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/save_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/show.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/show_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/url.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/url_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/user.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/images/user_dark.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/license.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/resources/schemas/entries.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/irfansaf/safpass/util/CryptUtilsTest.java" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding Resources">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/com_irfansaf_safpass_SAFPASS_main_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/GeneratePasswordDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/GeneratePasswordDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SvgImageIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SvgImageIcon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/Worker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/Worker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/helper/FileHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/helper/FileHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/xml/converter/XmlConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/xml/converter/XmlConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/StringUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/StringUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,19 +83,25 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "development",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Irfan/Documents/President University/Object Oriented Programming/SAFPASS/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.0",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Irfan\Documents\President University\Object Oriented Programming\SAFPASS\out\artifacts\com_irfansaf_safpass_SAFPASS_main_jar" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Gradle.SAFPASS">
     <configuration name="Safpass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.irfansaf.safpass.Safpass" />
       <module name="com.irfansaf.safpass.SAFPASS.main" />
@@ -201,6 +115,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SAFPASS" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Safpass" />
+      <item itemvalue="Gradle.SAFPASS" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Safpass" />
@@ -231,42 +169,9 @@
       <workItem from="1681914633383" duration="2517000" />
       <workItem from="1681923837913" duration="2941000" />
       <workItem from="1681926814400" duration="3218000" />
-      <workItem from="1681958135672" duration="34877000" />
-    </task>
-    <task id="LOCAL-00004" summary="Working on Message Dialog">
-      <created>1681495853618</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1681495853619</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Resource as String">
-      <created>1681532365124</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1681532365124</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Image Icon and GetIcon">
-      <created>1681533418996</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1681533418996</updated>
-    </task>
-    <task id="LOCAL-00007" summary="initializeDialog and createButton">
-      <created>1681534923532</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1681534923532</updated>
-    </task>
-    <task id="LOCAL-00008" summary="fix main panel area">
-      <created>1681537642687</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1681537642687</updated>
+      <workItem from="1681958135672" duration="36670000" />
+      <workItem from="1682004813124" duration="390000" />
+      <workItem from="1682044806224" duration="2309000" />
     </task>
     <task id="LOCAL-00009" summary="Creating showMessageDialog function">
       <created>1681538258293</created>
@@ -576,7 +481,42 @@
       <option name="project" value="LOCAL" />
       <updated>1682001009981</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="Making Inline Documentation FileHelper">
+      <created>1682001044552</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1682001044552</updated>
+    </task>
+    <task id="LOCAL-00054" summary="BugFixing Frame fullscreen">
+      <created>1682001074061</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1682001074061</updated>
+    </task>
+    <task id="LOCAL-00055" summary="BugFixing image resource could not locate">
+      <created>1682001101984</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1682001101985</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Making Inline Documentation Worker">
+      <created>1682001127721</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1682001127721</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Adding Resources">
+      <created>1682001215887</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1682001215887</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,11 +535,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Adding saveFile on FileHelper" />
-    <MESSAGE value="Adding MenuBar, Fix FileHelper" />
-    <MESSAGE value="Fix StatusPanel" />
-    <MESSAGE value="Adding EntryDialog and Fix typo" />
-    <MESSAGE value="Adding EntryHelper" />
     <MESSAGE value="Adding EntryDetailsTable" />
     <MESSAGE value="Fix Typo Worker.java" />
     <MESSAGE value="Add Entry to Frame" />
@@ -620,6 +555,11 @@
     <MESSAGE value="BugFixing Entries" />
     <MESSAGE value="BugFixing EntriesRepository" />
     <MESSAGE value="BugFixing EntryDialog and EntryHelper" />
-    <option name="LAST_COMMIT_MESSAGE" value="BugFixing EntryDialog and EntryHelper" />
+    <MESSAGE value="Making Inline Documentation FileHelper" />
+    <MESSAGE value="BugFixing Frame fullscreen" />
+    <MESSAGE value="BugFixing image resource could not locate" />
+    <MESSAGE value="Making Inline Documentation Worker" />
+    <MESSAGE value="Adding Resources" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Resources" />
   </component>
 </project>
