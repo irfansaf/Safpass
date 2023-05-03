@@ -9,10 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="BugFixing not output the full String">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/SAFPASS_jar.xml" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Final development update. and start Alpha Release">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/Configuration.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,10 +113,10 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.jsOptions&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -220,14 +224,12 @@
       <workItem from="1681958135672" duration="36670000" />
       <workItem from="1682004813124" duration="390000" />
       <workItem from="1682044806224" duration="3719000" />
-      <workItem from="1682048551666" duration="4296000" />
-    </task>
-    <task id="LOCAL-00010" summary="create constructor for Frame and Dialog">
-      <created>1681538464711</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1681538464711</updated>
+      <workItem from="1682048551666" duration="5886000" />
+      <workItem from="1682347318743" duration="217000" />
+      <workItem from="1683013880797" duration="541000" />
+      <workItem from="1683079062803" duration="62000" />
+      <workItem from="1683084357037" duration="2542000" />
+      <workItem from="1683127011254" duration="3402000" />
     </task>
     <task id="LOCAL-00011" summary="create Warning message">
       <created>1681538936681</created>
@@ -565,7 +567,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682047329131</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="Final development update. and start Alpha Release">
+      <created>1682070832778</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1682070832778</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +593,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Fix Typo Worker.java" />
     <MESSAGE value="Add Entry to Frame" />
     <MESSAGE value="Add CloseListener for window close." />
     <MESSAGE value="Add AbstractMenuAction for handling menu actions" />
@@ -609,6 +617,7 @@
     <MESSAGE value="Making Inline Documentation Worker" />
     <MESSAGE value="Adding Resources" />
     <MESSAGE value="BugFixing not output the full String" />
-    <option name="LAST_COMMIT_MESSAGE" value="BugFixing not output the full String" />
+    <MESSAGE value="Final development update. and start Alpha Release" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final development update. and start Alpha Release" />
   </component>
 </project>
