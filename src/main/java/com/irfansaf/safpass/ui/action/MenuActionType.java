@@ -99,7 +99,7 @@ public enum MenuActionType {
             sb.append("Copyright &copy; 2023 Irfan Saf\n");
             sb.append("\n");
             sb.append("Java version: ").append(System.getProperties().getProperty("java.version")).append("\n");
-            sb.append(System.getProperties().getProperty("java.vendor"));
+            sb.append("Author: <a href='https://www.instagram.com/irfansafx'>Irfan Saf</a>\n");
             MessageDialog.showInformationMessage(SafPassFrame.getInstance(), sb.toString());
         }
     }),

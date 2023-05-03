@@ -42,7 +42,7 @@ public final class SafPassFrame extends JFrame {
     private static SafPassFrame instance;
 
     public static final String PROGRAM_NAME = "SafPass Password Manager";
-    public static final String PROGRAM_VERSION = "1.0.0-SNAPSHOT";
+    public static final String PROGRAM_VERSION = "1.0.1-Alpha";
 
     private final JPopupMenu popup;
     private final JPanel topContainerPanel;
