@@ -9,14 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Final development update. and start Alpha Release">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" afterDir="false" />
+    <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding Purchase Code Features">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/Safpass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/Configuration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/util/Configuration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +101,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;development&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Features-Purchase-Code&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Irfan/Documents/President University/Object Oriented Programming/SAFPASS/src/main/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -229,14 +225,8 @@
       <workItem from="1683013880797" duration="541000" />
       <workItem from="1683079062803" duration="62000" />
       <workItem from="1683084357037" duration="2542000" />
-      <workItem from="1683127011254" duration="3402000" />
-    </task>
-    <task id="LOCAL-00011" summary="create Warning message">
-      <created>1681538936681</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1681538936681</updated>
+      <workItem from="1683127011254" duration="5140000" />
+      <workItem from="1683132254185" duration="2107000" />
     </task>
     <task id="LOCAL-00012" summary="make inline documentation">
       <created>1681539234903</created>
@@ -574,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682070832778</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Adding Purchase Code Features">
+      <created>1683130504512</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1683130504512</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +590,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Add Entry to Frame" />
     <MESSAGE value="Add CloseListener for window close." />
     <MESSAGE value="Add AbstractMenuAction for handling menu actions" />
     <MESSAGE value="Add Interface SafPassStream" />
@@ -618,6 +614,7 @@
     <MESSAGE value="Adding Resources" />
     <MESSAGE value="BugFixing not output the full String" />
     <MESSAGE value="Final development update. and start Alpha Release" />
-    <option name="LAST_COMMIT_MESSAGE" value="Final development update. and start Alpha Release" />
+    <MESSAGE value="Adding Purchase Code Features" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Purchase Code Features" />
   </component>
 </project>
