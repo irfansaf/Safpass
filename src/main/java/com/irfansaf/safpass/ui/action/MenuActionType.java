@@ -2,6 +2,7 @@ package com.irfansaf.safpass.ui.action;
 
 import com.irfansaf.safpass.ui.GeneratePasswordDialog;
 import com.irfansaf.safpass.ui.MessageDialog;
+import com.irfansaf.safpass.ui.ProfileDialog;
 import com.irfansaf.safpass.ui.SafPassFrame;
 import com.irfansaf.safpass.ui.helper.EntryHelper;
 import com.irfansaf.safpass.xml.bind.Entry;
@@ -90,6 +91,18 @@ public enum MenuActionType {
             SafPassFrame.getInstance().exitFrame();
         }
     }),
+//    PROFILE(new AbstractMenuAction("Profile Information", getIcon("user"), getKeyStroke(KeyEvent.VK_P, CTRL_DOWN_MASK)) {
+//        private SafPassFrame safPassFrame;
+//        public AbstractMenuAction init(SafPassFrame safPassFrame) {
+//            this.safPassFrame = safPassFrame;
+//            return this;
+//        }
+//        @Override
+//        public void actionPerformed(ActionEvent e) {
+//            ProfileDialog profileDialog = new ProfileDialog(this.safPassFrame);
+//            profileDialog.setVisible(true);
+//        }
+//    }.init(null)),
     ABOUT(new AbstractMenuAction("About SafPass...", getIcon("info"), getKeyStroke(KeyEvent.VK_F1, 0)) {
         @Override
         public void actionPerformed(ActionEvent ev) {

@@ -59,6 +59,8 @@ public final class SafPassFrame extends JFrame {
     private final DataModel model = DataModel.getInstance();
     private final StatusPanel statusPanel;
     private volatile boolean processing = false;
+    private String accessToken;
+
 
     private SafPassFrame(String fileName) {
 
@@ -188,9 +190,17 @@ public final class SafPassFrame extends JFrame {
         return getInstance(null);
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
     private void authenticateUser() {
         LoginDialog loginDialog = new LoginDialog(this);
         loginDialog.setVisible(true);
+        loginDialog.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
 
