@@ -61,6 +61,11 @@ public final class SafPassFrame extends JFrame {
     private volatile boolean processing = false;
 
     private SafPassFrame(String fileName) {
+
+        authenticateUser();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         try {
             setIconImages(Stream.of(16, 20, 32, 40, 64, 80, 128, 160)
                     .map(size -> getIcon("safpass", size, size).getImage())
@@ -182,6 +187,13 @@ public final class SafPassFrame extends JFrame {
     public static SafPassFrame getInstance() {
         return getInstance(null);
     }
+
+    private void authenticateUser() {
+        LoginDialog loginDialog = new LoginDialog(this);
+        loginDialog.setVisible(true);
+    }
+
+
 
     public static synchronized SafPassFrame getInstance(String fileName) {
         if (instance == null) {

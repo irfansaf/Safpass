@@ -67,6 +67,7 @@ public class PurchaseCodeDialog extends JDialog {
                     connection.setRequestMethod("POST");
                     connection.setRequestProperty("Content-Type", "application/json");
                     connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+//                    connection.setRequestProperty("Authorization", "Bearer " + accessToken);
                     connection.setDoOutput(true);
 
                     String requestBody = String.format("{\"purchase_code\": \"%s\"}", purchaseCode);
