@@ -113,7 +113,7 @@ public class RegistrationDialog  extends JDialog implements ActionListener {
         }
 
         try {
-            URL url  = new URL("http://127.0.0.1:8000/api/register");
+            URL url  = new URL("https://safpass.irfansaf.com/api/register");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setRequestProperty("Content-Type", "application/json");
