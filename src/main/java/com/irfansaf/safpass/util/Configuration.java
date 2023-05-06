@@ -6,10 +6,13 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 public final class Configuration {
 
     private static final Logger LOG = Logger.getLogger(Configuration.class.getName());
+    public static final String PURCHASE_CODE_KEY = "purchaseCode";
     private static Configuration instance;
     private Properties properties = new Properties();
 
@@ -51,6 +54,33 @@ public final class Configuration {
             }
         }
         return value;
+    }
+
+    public void savePurchaseCode(String purchaseCode) throws BackingStoreException {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        prefs.put(PURCHASE_CODE_KEY, purchaseCode);
+        try {
+            prefs.flush();
+        } catch (BackingStoreException e) {
+
+        }
+    }
+
+    public void deletePurchaseCode() throws BackingStoreException {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        prefs.remove(PURCHASE_CODE_KEY);
+        prefs.flush();
+    }
+
+    public String getPurchaseCodeKey() {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        return prefs.get("PURCHASE_CODE_KEY", "");
+    }
+
+    public Boolean hasSavedPurchaseCode() {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        String savedPurchaseCode = prefs.get(PURCHASE_CODE_KEY, null);
+        return savedPurchaseCode != null;
     }
 
     public Boolean is(String key, Boolean defaultValue) {

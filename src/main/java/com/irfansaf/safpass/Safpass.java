@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.irfansaf.safpass.ui.SafPassFrame;
+import com.irfansaf.safpass.ui.PurchaseCodeDialog;
 import com.irfansaf.safpass.util.Configuration;
 
 import javax.swing.SwingUtilities;
@@ -13,6 +14,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.prefs.Preferences;
 
 public final class Safpass {
     private static final Logger LOG = Logger.getLogger(Safpass.class.getName());
@@ -23,6 +25,12 @@ public final class Safpass {
 
     private Safpass() {
         // Not Instantiated
+    }
+
+    public static boolean isPurchaseCodeValid() {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        String purchaseCode = prefs.get(Configuration.PURCHASE_CODE_KEY, null);
+        return purchaseCode != null && !purchaseCode.isEmpty();
     }
 
     public static void main(final String[] args) {
@@ -41,7 +49,15 @@ public final class Safpass {
         } catch (Exception e) {
             LOG.log(Level.CONFIG, "Could not set look and feel for the application", e);
         }
+        SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
 
-        SwingUtilities.invokeLater(() -> SafPassFrame.getInstance((args.length > 0) ? args[0] : null));
+//        SwingUtilities.invokeLater(() -> {
+//            while (!isPurchaseCodeValid()) {
+//                PurchaseCodeDialog purchaseCodeDialog=  new PurchaseCodeDialog();
+//                purchaseCodeDialog.setModal(true);
+//                purchaseCodeDialog.setVisible(true);
+//            }
+//            SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
+//        });
     }
 }

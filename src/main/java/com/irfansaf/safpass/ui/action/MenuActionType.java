@@ -1,9 +1,9 @@
 package com.irfansaf.safpass.ui.action;
 
-import com.irfansaf.safpass.ui.GeneratePasswordDialog;
-import com.irfansaf.safpass.ui.MessageDialog;
-import com.irfansaf.safpass.ui.SafPassFrame;
+import com.irfansaf.safpass.model.User;
+import com.irfansaf.safpass.ui.*;
 import com.irfansaf.safpass.ui.helper.EntryHelper;
+import com.irfansaf.safpass.ui.helper.ProfileHelper;
 import com.irfansaf.safpass.xml.bind.Entry;
 
 import java.awt.event.ActionEvent;
@@ -90,6 +90,14 @@ public enum MenuActionType {
             SafPassFrame.getInstance().exitFrame();
         }
     }),
+    PROFILE(new AbstractMenuAction("Profile Information", getIcon("user"), getKeyStroke(KeyEvent.VK_P, CTRL_DOWN_MASK)) {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            SafPassFrame instance = SafPassFrame.getInstance();
+            ProfileDialog profileDialog = new ProfileDialog(instance, instance.getUser(), instance.getAccessToken());
+            profileDialog.setVisible(true);
+        }
+    }),
     ABOUT(new AbstractMenuAction("About SafPass...", getIcon("info"), getKeyStroke(KeyEvent.VK_F1, 0)) {
         @Override
         public void actionPerformed(ActionEvent ev) {
@@ -99,7 +107,7 @@ public enum MenuActionType {
             sb.append("Copyright &copy; 2023 Irfan Saf\n");
             sb.append("\n");
             sb.append("Java version: ").append(System.getProperties().getProperty("java.version")).append("\n");
-            sb.append(System.getProperties().getProperty("java.vendor"));
+            sb.append("Author: <a href='https://www.instagram.com/irfansafx'>Irfan Saf</a>\n");
             MessageDialog.showInformationMessage(SafPassFrame.getInstance(), sb.toString());
         }
     }),
