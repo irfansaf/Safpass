@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.irfansaf.safpass'
-version '1.0.1-Alpha'
+version '1.0.1'
 
 repositories {
     mavenCentral()

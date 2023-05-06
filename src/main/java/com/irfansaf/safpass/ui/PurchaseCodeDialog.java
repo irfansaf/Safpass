@@ -66,7 +66,7 @@ public class PurchaseCodeDialog extends JDialog {
                 }
 
                 try {
-                    URL url = new URL("http://127.0.0.1:8000/api/validate-purchase-code");
+                    URL url = new URL("https://safpass.irfansaf.com/api/validate-purchase-code");
                     LOG.log(Level.INFO, "Request URL: {0}", url.toString());
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");

@@ -167,7 +167,7 @@ public class ProfileDialog extends JDialog{
 
     private void updateUserInfo(String fieldName, String newValue) {
         try {
-            URL url = new URL("http://127.0.0.1:8000/api/users/" + userId);
+            URL url = new URL("https://safpass.irfansaf.com/api/users/" + userId);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("PUT");
             connection.setRequestProperty("Authorization", "Bearer " + accessToken);
