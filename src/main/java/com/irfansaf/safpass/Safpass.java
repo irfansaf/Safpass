@@ -49,14 +49,15 @@ public final class Safpass {
         } catch (Exception e) {
             LOG.log(Level.CONFIG, "Could not set look and feel for the application", e);
         }
+        SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
 
-        SwingUtilities.invokeLater(() -> {
-            while (!isPurchaseCodeValid()) {
-                PurchaseCodeDialog purchaseCodeDialog=  new PurchaseCodeDialog();
-                purchaseCodeDialog.setModal(true);
-                purchaseCodeDialog.setVisible(true);
-            }
-            SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
-        });
+//        SwingUtilities.invokeLater(() -> {
+//            while (!isPurchaseCodeValid()) {
+//                PurchaseCodeDialog purchaseCodeDialog=  new PurchaseCodeDialog();
+//                purchaseCodeDialog.setModal(true);
+//                purchaseCodeDialog.setVisible(true);
+//            }
+//            SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
+//        });
     }
 }

@@ -66,6 +66,17 @@ public final class Configuration {
         }
     }
 
+    public void deletePurchaseCode() throws BackingStoreException {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        prefs.remove(PURCHASE_CODE_KEY);
+        prefs.flush();
+    }
+
+    public String getPurchaseCodeKey() {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        return prefs.get("PURCHASE_CODE_KEY", "");
+    }
+
     public Boolean hasSavedPurchaseCode() {
         Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
         String savedPurchaseCode = prefs.get(PURCHASE_CODE_KEY, null);
