@@ -2,6 +2,8 @@ package com.irfansaf.safpass.ui;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.irfansaf.safpass.model.User;
+import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.util.SpringUtilities;
 
 import javax.swing.*;
@@ -13,10 +15,12 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.prefs.Preferences;
 
 public class LoginDialog extends JDialog implements ActionListener {
     private SafPassFrame parentFrame;
     private String accessToken;
+    private String userId;
     private JPanel buttonPanel;
     private JPanel fieldPanel;
     private JTextField emailOrUsernameField;
@@ -97,6 +101,9 @@ public class LoginDialog extends JDialog implements ActionListener {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     private void authenticateUser() {
         String emailOrUsername = emailOrUsernameField.getText().trim();
@@ -114,7 +121,7 @@ public class LoginDialog extends JDialog implements ActionListener {
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-            String jsonInputString = String.format("{\"email_or_username\": \"%s\", \"password\": \"%s\"}", emailOrUsername, password);
+            String jsonInputString = String.format("{\"login\": \"%s\", \"password\": \"%s\"}", emailOrUsername, password);
 
             try (OutputStream os = connection.getOutputStream()) {
                 byte[] input = jsonInputString.getBytes("utf-8");
@@ -137,8 +144,24 @@ public class LoginDialog extends JDialog implements ActionListener {
 
                     parentFrame.setAccessToken(accessToken);
 
+                    if (jsonNode.has("user_id")) {
+                        String userId = jsonNode.get("user_id").asText();
+                        parentFrame.setUserId(userId);
+                    } else {
+                        System.out.println("User ID not found in response");
+                    }
+
                     MessageDialog.showInformationMessage(this, "Login Success");
                     dispose();
+
+                    // Purchase Code Dialog
+                    SwingUtilities.invokeLater(() -> {
+                        while (!isPurchaseCodeValid()) {
+                            PurchaseCodeDialog purchaseCodeDialog=  new PurchaseCodeDialog(userId);
+                            purchaseCodeDialog.setModal(true);
+                            purchaseCodeDialog.setVisible(true);
+                        }
+                    });
                 }
             } else {
                 MessageDialog.showWarningMessage(this,"Invalid email/username or password. Please try again.");
@@ -147,6 +170,12 @@ public class LoginDialog extends JDialog implements ActionListener {
             e.printStackTrace();
             MessageDialog.showWarningMessage(this,"Error connecting to the server. Please try again");
         }
+    }
+
+    public static boolean isPurchaseCodeValid() {
+        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
+        String purchaseCode = prefs.get(Configuration.PURCHASE_CODE_KEY, null);
+        return purchaseCode != null && !purchaseCode.isEmpty();
     }
 
     private void showRegistrationDialog() {

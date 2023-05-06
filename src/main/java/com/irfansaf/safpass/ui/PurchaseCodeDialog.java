@@ -18,17 +18,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.irfansaf.safpass.Safpass;
+import com.irfansaf.safpass.model.User;
 import com.irfansaf.safpass.util.Configuration;
 
 
 public class PurchaseCodeDialog extends JDialog {
     private static final Logger LOG = Logger.getLogger(PurchaseCodeDialog.class.getName());
-
+    private String userId;
+    private String accessToken;
+    private SafPassFrame parentFrame;
     private final FlatTextField purchaseCodeField = new FlatTextField();
     private JLabel messageLabel;
     private final FlatButton submitButton = new FlatButton();
 
-    public PurchaseCodeDialog() {
+    public PurchaseCodeDialog(String userId) {
+        this.userId = userId;
+
         setTitle("Enter Purchase Code");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -69,7 +74,10 @@ public class PurchaseCodeDialog extends JDialog {
                     connection.setRequestProperty("User-Agent", "Mozilla/5.0");
                     connection.setDoOutput(true);
 
-                    String requestBody = String.format("{\"purchase_code\": \"%s\"}", purchaseCode);
+                    String userId = SafPassFrame.getInstance().getUserId();
+
+                    String requestBody = String.format("{\"user_id\": \"%s\", \"purchase_code\": \"%s\"}", userId, purchaseCode);
+                    System.out.println(requestBody);
                     try (OutputStream os = connection.getOutputStream()) {
                         byte[] input = requestBody.getBytes("utf-8");
                         os.write(input, 0, input.length);

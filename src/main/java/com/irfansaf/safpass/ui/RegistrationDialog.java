@@ -128,7 +128,7 @@ public class RegistrationDialog  extends JDialog implements ActionListener {
             requestBody.put("username", username);
             requestBody.put("email", email);
             requestBody.put("password", password);
-//            requestBody.put("password_confirmation", confirmPassword);
+            requestBody.put("password_confirmation", confirmPassword);
             try (OutputStream outputStream = connection.getOutputStream()) {
                 outputStream.write(requestBody.toString().getBytes(StandardCharsets.UTF_8));
                 outputStream.flush();
@@ -144,11 +144,14 @@ public class RegistrationDialog  extends JDialog implements ActionListener {
                     }
                     // Parse the JSON response to get the access token
                     String jsonResponse = response.toString();
+                    System.out.println(jsonResponse);
                     ObjectMapper objectMapper = new ObjectMapper();
                     JsonNode jsonNode = objectMapper.readTree(jsonResponse);
                     String accessToken = jsonNode.get("access_token").asText();
+                    String userId = jsonNode.get("id").asText();
 
                     parentDialog.setAccessToken(accessToken);
+                    parentDialog.setUserId(userId);
                 }
 
                 MessageDialog.showInformationMessage(this,"User registered successfully");

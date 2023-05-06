@@ -1,16 +1,20 @@
 package com.irfansaf.safpass.ui;
 
 import com.irfansaf.safpass.data.DataModel;
+import com.irfansaf.safpass.model.User;
 import com.irfansaf.safpass.ui.action.CloseListener;
 import com.irfansaf.safpass.ui.action.MenuActionType;
 import com.irfansaf.safpass.ui.helper.EntryHelper;
 import com.irfansaf.safpass.ui.helper.FileHelper;
 import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.xml.bind.Entry;
+//import com.irfansaf.safpass.ui.
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,15 +24,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.swing.JFrame;
-import javax.swing.JTable;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JToolBar;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
 import static com.irfansaf.safpass.ui.MessageDialog.NO_OPTION;
 import static com.irfansaf.safpass.ui.MessageDialog.YES_NO_CANCEL_OPTION;
@@ -40,6 +36,10 @@ public final class SafPassFrame extends JFrame {
     private static final Logger LOG = Logger.getLogger(SafPassFrame.class.getName());
 
     private static SafPassFrame instance;
+    private String accessToken;
+    private String userId;
+    private User user;
+    private ProfileDialog profileDialog;
 
     public static final String PROGRAM_NAME = "SafPass Password Manager";
     public static final String PROGRAM_VERSION = "1.0.1-Alpha";
@@ -59,8 +59,6 @@ public final class SafPassFrame extends JFrame {
     private final DataModel model = DataModel.getInstance();
     private final StatusPanel statusPanel;
     private volatile boolean processing = false;
-    private String accessToken;
-
 
     private SafPassFrame(String fileName) {
 
@@ -92,6 +90,7 @@ public final class SafPassFrame extends JFrame {
         this.toolBar.add(MenuActionType.COPY_PASSWORD.getAction());
         this.toolBar.add(MenuActionType.CLEAR_CLIPBOARD.getAction());
         this.toolBar.addSeparator();
+        this.toolBar.add(MenuActionType.PROFILE.getAction());
         this.toolBar.add(MenuActionType.ABOUT.getAction());
         this.toolBar.add(MenuActionType.EXIT.getAction());
 
@@ -196,14 +195,30 @@ public final class SafPassFrame extends JFrame {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    public String getUserId() {
+        return this.userId;
+    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     private void authenticateUser() {
         LoginDialog loginDialog = new LoginDialog(this);
         loginDialog.setVisible(true);
-        loginDialog.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        loginDialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        loginDialog.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }
-
-
 
     public static synchronized SafPassFrame getInstance(String fileName) {
         if (instance == null) {
