@@ -1,36 +1,40 @@
 package com.irfansaf.safpass.ui;
 
-import com.formdev.flatlaf.extras.FlatSVGIcon;
-import com.formdev.flatlaf.extras.components.FlatButton;
-import com.formdev.flatlaf.extras.components.FlatPasswordField;
-import com.formdev.flatlaf.extras.components.FlatTextField;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.irfansaf.safpass.util.SpringUtilities;
-import com.irfansaf.safpass.ui.TextComponentFactory;
-import org.w3c.dom.Text;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.Key;
 
 public class LoginDialog extends JDialog implements ActionListener {
+    private SafPassFrame parentFrame;
+    private String accessToken;
     private JPanel buttonPanel;
     private JPanel fieldPanel;
     private JTextField emailOrUsernameField;
     private JPasswordField passwordField;
     private JButton loginButton;
     private JButton registerButton;
-    private boolean registerRequested = false;
 
-    public LoginDialog(JFrame parent) {
+    public LoginDialog(SafPassFrame parent) {
         super(parent, "Login", true);
+        this.parentFrame = parent;
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
 
         this.emailOrUsernameField = TextComponentFactory.newTextField();
         this.emailOrUsernameField.setPreferredSize(new Dimension(200, 25));
@@ -83,12 +87,15 @@ public class LoginDialog extends JDialog implements ActionListener {
             authenticateUser();
         } else if ("register_button".equals(command)) {
             showRegistrationDialog();
-            dispose();
         } else {
             dispose();
             setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         }
 
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     private void authenticateUser() {
@@ -100,7 +107,7 @@ public class LoginDialog extends JDialog implements ActionListener {
         }
 
         try {
-            URL url = new URL("http:127.0.0.1:8000/api/login");
+            URL url = new URL("http://127.0.0.1:8000/api/login");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
@@ -116,8 +123,23 @@ public class LoginDialog extends JDialog implements ActionListener {
 
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                MessageDialog.showInformationMessage(this,"Login success.");
-                dispose();
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+                    String responseLine;
+                    StringBuilder response = new StringBuilder();
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    // Parse JSON response to get the access token
+                    String jsonResponse = response.toString();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                    String accessToken = jsonNode.get("access_token").asText();
+
+                    parentFrame.setAccessToken(accessToken);
+
+                    MessageDialog.showInformationMessage(this, "Login Success");
+                    dispose();
+                }
             } else {
                 MessageDialog.showWarningMessage(this,"Invalid email/username or password. Please try again.");
             }

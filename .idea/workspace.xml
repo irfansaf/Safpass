@@ -10,11 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding Purchase Code Features">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/ProfileDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/action/MenuActionType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +105,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Fix-Purchase-Code-Dialog-404",
+    "git-widget-placeholder": "Features-Login-Register",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Irfan/Documents/President University/Object Oriented Programming/SAFPASS/src/main/resources",
     "node.js.detected.package.eslint": "true",
@@ -228,7 +230,7 @@
       <workItem from="1683079062803" duration="62000" />
       <workItem from="1683084357037" duration="2542000" />
       <workItem from="1683127011254" duration="5140000" />
-      <workItem from="1683132254185" duration="17209000" />
+      <workItem from="1683132254185" duration="31920000" />
     </task>
     <task id="LOCAL-00012" summary="make inline documentation">
       <created>1681539234903</created>

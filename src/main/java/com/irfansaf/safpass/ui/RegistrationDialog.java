@@ -1,16 +1,18 @@
 package com.irfansaf.safpass.ui;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.formdev.flatlaf.extras.components.FlatButton;
-import com.formdev.flatlaf.extras.components.FlatPasswordField;
-import com.formdev.flatlaf.extras.components.FlatTextField;
+import com.irfansaf.safpass.util.SpringUtilities;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -18,110 +20,78 @@ import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RegistrationDialog  extends JDialog {
+public class RegistrationDialog  extends JDialog implements ActionListener {
 
     private static final Logger LOG = Logger.getLogger(PurchaseCodeDialog.class.getName());
-    private FlatTextField firstNameField;
-    private FlatTextField lastNameField;
-    private FlatTextField userNameField;
-    private FlatTextField emailField;
-    private FlatPasswordField passwordField;
-    private FlatPasswordField confirmPasswordField;
-    private JLabel messageLabel;
-    private JFrame parent;
+    private JPanel fieldPanel;
+    private JPanel buttonPanel;
+    private JTextField firstNameField;
+    private JTextField lastNameField;
+    private JTextField userNameField;
+    private JTextField emailField;
+    private JPasswordField passwordField;
+    private JPasswordField confirmPasswordField;
+    private JButton registerButton;
+    private LoginDialog parentDialog;
 
     public RegistrationDialog(LoginDialog parent) {
         super(parent, "Register", true);
+        this.parentDialog = parent;
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        initComponents();
-        setupLayout();
+        this.userNameField = TextComponentFactory.newTextField();
+        this.firstNameField = TextComponentFactory.newTextField();
+        this.lastNameField = TextComponentFactory.newTextField();
+        this.emailField = TextComponentFactory.newTextField();
+
+        this.passwordField = TextComponentFactory.newPasswordField(false);
+        this.confirmPasswordField = TextComponentFactory.newPasswordField(false);
+
+        this.registerButton = new JButton("Register", MessageDialog.getIcon("accept"));
+        this.registerButton.setActionCommand("register_button");
+        this.registerButton.setMnemonic(KeyEvent.VK_ENTER);
+        this.registerButton.addActionListener(this);
+
+        this.buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        this.buttonPanel.add(this.registerButton);
+        this.buttonPanel.add(Box.createHorizontalStrut(10));
+
+        this.fieldPanel = new JPanel(new SpringLayout());
+        this.fieldPanel.add(new JLabel("Username:"));
+        this.fieldPanel.add(this.userNameField);
+        this.fieldPanel.add(new JLabel("First Name:"));
+        this.fieldPanel.add(this.firstNameField);
+        this.fieldPanel.add(new JLabel("Last Name:"));
+        this.fieldPanel.add(this.lastNameField);
+        this.fieldPanel.add(new JLabel("Email:"));
+        this.fieldPanel.add(this.emailField);
+        this.fieldPanel.add(new JLabel("Password"));
+        this.fieldPanel.add(this.passwordField);
+        this.fieldPanel.add(new JLabel("Repeat Password"));
+        this.fieldPanel.add(this.confirmPasswordField);
+        SpringUtilities.makeCompactGrid(this.fieldPanel,
+                6, 2,
+                5, 5,
+                5, 5);
+
+        JPanel contentPanel = new JPanel(new BorderLayout());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // add some padding around the content panel
+        contentPanel.add(this.fieldPanel, BorderLayout.CENTER);
+        contentPanel.add(this.buttonPanel, BorderLayout.SOUTH);
+
+        getContentPane().add(contentPanel, BorderLayout.CENTER);
+        setSize(350, 300);
+        setMinimumSize(new Dimension(270, 200));
+        setLocationRelativeTo(parent);
+        setVisible(false);
     }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String command = e.getActionCommand();
 
-    private void initComponents() {
-        firstNameField = new FlatTextField();
-        lastNameField = new FlatTextField();
-        userNameField = new FlatTextField();
-        emailField = new FlatTextField();
-        passwordField = new FlatPasswordField();
-        confirmPasswordField = new FlatPasswordField();
-
-        messageLabel = new JLabel();
-
-        FlatButton registerButton = new FlatButton();
-        registerButton.setText("Register");
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registerUser();
-            }
-        });
-    }
-
-    private void setupLayout() {
-        setLayout(new GridLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(2, 2, 2,2);
-
-        // First Name
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        add(new JLabel("First Name:"), gbc);
-        gbc.gridx = 1;
-        add(firstNameField, gbc);
-
-        // Last Name
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        add(new JLabel("Last Name:"), gbc);
-        gbc.gridx = 1;
-        add(lastNameField, gbc);
-
-        // User Name
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        add(new JLabel("Username:"), gbc);
-        gbc.gridx = 1;
-        add(userNameField, gbc);
-
-        // Email
-        gbc.gridx = 0;
-        gbc.gridy = 3;
-        add(new JLabel("Email:"), gbc);
-        gbc.gridx = 1;
-        add(emailField, gbc);
-
-        // Password
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        add(new JLabel("Password:"), gbc);
-        gbc.gridx = 1;
-        add(passwordField, gbc);
-
-        // Confirm Password
-        gbc.gridx = 0;
-        gbc.gridy = 5;
-        add(new JLabel("Confirm Password:"), gbc);
-        gbc.gridx = 1;
-        add(confirmPasswordField, gbc);
-
-        // Message Label
-        gbc.gridx = 0;
-        gbc.gridy = 6;
-        gbc.gridwidth = 2;
-        add(messageLabel, gbc);
-
-        // Register Button
-        FlatButton registerButton = new FlatButton();
-        registerButton.setText("Register");
-        registerButton.addActionListener(e -> registerUser());
-        gbc.gridx = 0;
-        gbc.gridy = 7;
-        gbc.gridwidth = 2;
-        add(registerButton, gbc);
-
-        pack();
-        setLocationRelativeTo(null);
+        if ("register_button".equals(command)) {
+            registerUser();
+        }
     }
 
     public void registerUser() {
@@ -133,12 +103,12 @@ public class RegistrationDialog  extends JDialog {
         String confirmPassword = new String(confirmPasswordField.getPassword()).trim();
 
         if (firstName.isEmpty() || lastName.isEmpty() || username.isEmpty() || email.isEmpty() || confirmPassword.isEmpty()) {
-            messageLabel.setText("Please fill in all fields");
+           MessageDialog.showWarningMessage(this, "Please fill in all fields");
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-            messageLabel.setText("Password do not match");
+            MessageDialog.showWarningMessage(this,"Password do not match");
             return;
         }
 
@@ -166,14 +136,31 @@ public class RegistrationDialog  extends JDialog {
 
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_CREATED) {
-                messageLabel.setText("User registered successfully");
+                try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
+                    String responseLine;
+                    StringBuilder response = new StringBuilder();
+                    while ((responseLine = br.readLine()) != null) {
+                        response.append(responseLine.trim());
+                    }
+                    // Parse the JSON response to get the access token
+                    String jsonResponse = response.toString();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                    String accessToken = jsonNode.get("access_token").asText();
+
+                    parentDialog.setAccessToken(accessToken);
+                }
+
+                MessageDialog.showInformationMessage(this,"User registered successfully");
                 dispose();
             } else {
-                messageLabel.setText("Error registering user. Please try again.");
+                MessageDialog.showWarningMessage(this,"Error registering user. Please try again.");
             }
         } catch (IOException e) {
             LOG.log(Level.SEVERE, "Error registering user. Please try again.");
-            messageLabel.setText("Error registering user. Please try again");
+            MessageDialog.showErrorMessage(this,"Error registering user. Please try again");
         }
     }
+
+
 }
