@@ -167,7 +167,7 @@ public class ProfileDialog extends JDialog{
 
     private void updateUserInfo(String fieldName, String newValue) {
         try {
-            URL url = new URL("http://127.0.0.1:8000/api/users/" + userId);
+            URL url = new URL("http://safpass.irfansaf.com/api/users/" + userId);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("PUT");
             connection.setRequestProperty("Authorization", "Bearer " + accessToken);
@@ -191,7 +191,8 @@ public class ProfileDialog extends JDialog{
                 MessageDialog.showWarningMessage(this, "Error updating user information. Please try again.");
             }
         } catch (IOException e) {
-            MessageDialog.showErrorMessage(this, "Error updating user information. Please try again");
+            e.printStackTrace();
+            MessageDialog.showErrorMessage(this, "Error updating user information. Error details: " + e.getMessage());
         }
     }
 
@@ -199,7 +200,7 @@ public class ProfileDialog extends JDialog{
         String accessToken = parentFrame.getAccessToken();
         String userId = parentFrame.getUserId();
         try {
-            URL url = new URL("http://127.0.0.1:8000/api/users/" + userId);
+            URL url = new URL("http://safpass.irfansaf.com/api/users/" + userId);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("Authorization", "Bearer " + accessToken);
