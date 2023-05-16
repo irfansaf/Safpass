@@ -12,17 +12,7 @@ import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Optional;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.SpringLayout;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import static com.irfansaf.safpass.ui.helper.EntryHelper.copyEntryField;
@@ -46,7 +36,7 @@ public class EntryDialog extends JDialog implements ActionListener {
     private final JTextField userField;
     private final JPasswordField passwordField;
     private final JPasswordField repeatField;
-    private final JTextField urlField;
+    private final JComboBox<String> urlField;
     private final JTextArea notesField;
 
     private final JButton okButton;
@@ -77,7 +67,7 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.modifiedEntry = null;
 
         this.titleField = TextComponentFactory.newTextField();
-        this.urlField = TextComponentFactory.newTextField();
+        this.urlField = TextComponentFactory.newURLDropdown();
         this.userField = TextComponentFactory.newTextField();
         this.passwordField = TextComponentFactory.newPasswordField(true);
         this.originalEcho = this.passwordField.getEchoChar();
@@ -203,7 +193,18 @@ public class EntryDialog extends JDialog implements ActionListener {
         String title = StringUtils.stripNonValidXMLCharacters(this.titleField.getText());
         String user = StringUtils.stripNonValidXMLCharacters(this.userField.getText());
         String password = StringUtils.stripNonValidXMLCharacters(String.valueOf(this.passwordField.getPassword()));
-        String url = StringUtils.stripNonValidXMLCharacters(this.urlField.getText());
+        String url = null;
+        if (this.urlField.getSelectedItem() instanceof String) {
+            String selectedURL = (String) this.urlField.getSelectedItem();
+            if (!"Custom".equals(selectedURL)) {
+                url = StringUtils.stripNonValidXMLCharacters(selectedURL);
+            } else {
+                String customURL = JOptionPane.showInputDialog(this.urlField, "Enter Custom URL:");
+                if (customURL != null && !customURL.trim().isEmpty()) {
+                    url = StringUtils.stripNonValidXMLCharacters(customURL);
+                }
+            }
+        }
         String notes = StringUtils.stripNonValidXMLCharacters(this.notesField.getText());
 
         entry.setTitle(title == null || title.isEmpty() ? null : title);
@@ -252,7 +253,26 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.userField.setText(entry.getUser() == null ? "" : entry.getUser());
         this.passwordField.setText(entry.getPassword() == null ? "" : entry.getPassword());
         this.repeatField.setText(entry.getPassword() == null ? "" : entry.getPassword());
-        this.urlField.setText(entry.getUrl() == null ? "" : entry.getUrl());
+
+        if (entry.getUrl() == null) {
+            this.urlField.setSelectedItem("");
+        } else {
+            int index = -1;
+            String url = entry.getUrl();
+            for (int i = 0; i < this.urlField.getItemCount(); i++) {
+                if (url.equals(this.urlField.getItemAt(i))) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index >= 0) {
+                this.urlField.setSelectedItem(index);
+            } else {
+                this.urlField.setSelectedItem("Custom");
+                this.urlField.addItem(url);
+            }
+        }
+
         this.notesField.setText(entry.getNotes() == null ? "" : entry.getNotes());
         this.notesField.setCaretPosition(0);
     }
