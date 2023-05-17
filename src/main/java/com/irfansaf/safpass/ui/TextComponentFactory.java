@@ -1,11 +1,12 @@
 package com.irfansaf.safpass.ui;
 
-import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.irfansaf.safpass.ui.action.TextComponentActionType;
 import com.irfansaf.safpass.ui.action.TextComponentPopupListener;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public final class TextComponentFactory {
     private TextComponentFactory() {
@@ -82,6 +83,30 @@ public final class TextComponentFactory {
         textArea.addMouseListener(new TextComponentPopupListener());
         TextComponentActionType.bindAllActions(textArea);
         return textArea;
+    }
+
+    public static JComboBox<String> newURLDropdown() {
+        String[] predefinedURLs = { "Twitter.com", "Instagram.com", "Facebook.com", "Gmail.com", "Custom" };
+
+        JComboBox<String> urlDropdown = new JComboBox<>(predefinedURLs);
+
+        urlDropdown.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JComboBox<String> comboBox = (JComboBox<String>) e.getSource();
+
+                if ("Custom".equals(comboBox.getSelectedItem())) {
+                    String customURL = JOptionPane.showInputDialog(comboBox, "Enter custom URL:");
+
+                    if (customURL != null && !customURL.trim().isEmpty()) {
+                        comboBox.addItem(customURL);
+                        comboBox.setSelectedItem(customURL);
+                    }
+                }
+            }
+        });
+
+        return urlDropdown;
     }
 
 

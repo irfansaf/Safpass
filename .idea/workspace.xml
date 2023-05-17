@@ -12,10 +12,6 @@
     <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding Access Token to Authorize API Request">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/ProfileDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/ProfileDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/PurchaseCodeDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/SafPassFrame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +101,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Features-Authentication-PurchaseCode",
+    "git-widget-placeholder": "Redesign-Entry-Dialog",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/Irfan/Documents/President University/Object Oriented Programming/SAFPASS/src/main/resources",
     "node.js.detected.package.eslint": "true",
@@ -258,7 +254,15 @@
       <workItem from="1683284914474" duration="6977000" />
       <workItem from="1683308889767" duration="12000" />
       <workItem from="1683308962292" duration="56000" />
-      <workItem from="1683309067907" duration="11446000" />
+      <workItem from="1683309067907" duration="14463000" />
+      <workItem from="1683376618534" duration="105000" />
+      <workItem from="1683377979032" duration="247000" />
+      <workItem from="1683425135317" duration="2420000" />
+      <workItem from="1683520998884" duration="196000" />
+      <workItem from="1683522099192" duration="4027000" />
+      <workItem from="1684137721627" duration="2000" />
+      <workItem from="1684241340382" duration="6261000" />
+      <workItem from="1684321951177" duration="4478000" />
     </task>
     <task id="LOCAL-00013" summary="Adding Text Component and the utils for working on it">
       <created>1681568484006</created>

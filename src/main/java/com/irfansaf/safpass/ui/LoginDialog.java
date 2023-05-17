@@ -114,7 +114,7 @@ public class LoginDialog extends JDialog implements ActionListener {
         }
 
         try {
-            URL url = new URL("https://safpass.irfansaf.com/api/login");
+            URL url = new URL("http://safpass.irfansaf.com/api/login");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("POST");
             connection.setDoOutput(true);
