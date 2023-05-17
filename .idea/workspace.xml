@@ -125,7 +125,7 @@
       <recent name="C:\Users\Irfan\Documents\President University\Object Oriented Programming\SAFPASS\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Safpass">
+  <component name="RunManager" selected="Gradle.SAFPASS [jar]">
     <configuration name="Safpass" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.irfansaf.safpass.Safpass" />
       <module name="com.irfansaf.safpass.SAFPASS.main" />
@@ -138,6 +138,28 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="SAFPASS [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
     </configuration>
     <configuration name="SAFPASS [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
@@ -184,10 +206,12 @@
     <list>
       <item itemvalue="Application.Safpass" />
       <item itemvalue="Gradle.SAFPASS" />
+      <item itemvalue="Gradle.SAFPASS [jar]" />
       <item itemvalue="Gradle.SAFPASS [test]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.SAFPASS [jar]" />
         <item itemvalue="Gradle.SAFPASS [test]" />
         <item itemvalue="Application.Safpass" />
         <item itemvalue="Application.Safpass" />
