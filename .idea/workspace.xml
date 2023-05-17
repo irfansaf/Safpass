@@ -12,10 +12,6 @@
     <list default="true" id="8a80e0c0-0e36-4f72-813b-a1867efb6836" name="Changes" comment="Adding Access Token to Authorize API Request">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/EntryDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/EntryDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/LoginDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/ProfileDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/ProfileDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/RegistrationDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/TextComponentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/irfansaf/safpass/ui/TextComponentFactory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +100,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Endpoint-Api-Production&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;features-dropdown-url&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Irfan/Documents/President University/Object Oriented Programming/SAFPASS/src/main/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -240,7 +236,8 @@
       <workItem from="1683520998884" duration="196000" />
       <workItem from="1683522099192" duration="4027000" />
       <workItem from="1684137721627" duration="2000" />
-      <workItem from="1684241340382" duration="5727000" />
+      <workItem from="1684241340382" duration="6261000" />
+      <workItem from="1684321951177" duration="3308000" />
     </task>
     <task id="LOCAL-00013" summary="Adding Text Component and the utils for working on it">
       <created>1681568484006</created>

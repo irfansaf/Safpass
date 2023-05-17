@@ -8,6 +8,7 @@ import com.irfansaf.safpass.xml.bind.Entry;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
 import java.util.Optional;
@@ -31,19 +32,24 @@ public class EntryDialog extends JDialog implements ActionListener {
     private final JPanel notesPanel;
     private final JPanel buttonPanel;
     private final JPanel passwordButtonPanel;
+    private final JPanel notesRadioPanel;
 
     private final JTextField titleField;
     private final JTextField userField;
     private final JPasswordField passwordField;
     private final JPasswordField repeatField;
     private final JComboBox<String> urlField;
-    private final JTextArea notesField;
+    private JTextArea notesField = null;
 
     private final JButton okButton;
     private final JButton cancelButton;
-    private final JToggleButton showButton;
+//    private final JToggleButton showButton;
+    private final JCheckBox showCheckbox;
+    private JRadioButton notesYes;
+    private JRadioButton notesNo;
     private final JButton generateButton;
     private final JButton copyButton;
+    private final ButtonGroup checkGroup;
 
     private final char originalEcho;
 
@@ -73,10 +79,21 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.originalEcho = this.passwordField.getEchoChar();
         this.repeatField = TextComponentFactory.newPasswordField(true);
 
-        this.showButton = new JToggleButton("Show", MessageDialog.getIcon("show"));
-        this.showButton.setActionCommand("show_button");
-        this.showButton.setMnemonic(KeyEvent.VK_S);
-        this.showButton.addActionListener(this);
+//        this.showButton = new JToggleButton("Show", MessageDialog.getIcon("show"));
+//        this.showButton.setActionCommand("show_button");
+//        this.showButton.setMnemonic(KeyEvent.VK_S);
+//        this.showButton.addActionListener(this);
+
+        JPanel checkBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.showCheckbox = new JCheckBox("Show Password");
+        showCheckbox.addItemListener(e -> {
+            char echoChar = e.getStateChange() == ItemEvent.SELECTED ? NULL_ECHO : originalEcho;
+            passwordField.setEchoChar(echoChar);
+            repeatField.setEchoChar(echoChar);
+        });
+        checkBoxPanel.add(showCheckbox);
+
+
         this.generateButton = new JButton("Generate", MessageDialog.getIcon("generate"));
         this.generateButton.setActionCommand("generate_button");
         this.generateButton.setMnemonic(KeyEvent.VK_G);
@@ -87,13 +104,39 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.copyButton.addActionListener(this);
 
         this.passwordButtonPanel = new JPanel(new SpringLayout());
-        this.passwordButtonPanel.add(this.showButton);
+        this.passwordButtonPanel.add(checkBoxPanel);
         this.passwordButtonPanel.add(this.generateButton);
         this.passwordButtonPanel.add(this.copyButton);
         SpringUtilities.makeCompactGrid(this.passwordButtonPanel,
                 1, 3, // rows, columns
                 0, 0, // initX, initY
                 5, 0); // xPad, yPad
+
+        this.notesYes = new JRadioButton("Yes");
+        this.notesNo = new JRadioButton("No");
+        this.checkGroup = new ButtonGroup();
+        checkGroup.add(notesYes);
+        checkGroup.add(notesNo);
+
+        notesYes.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                notesField.setVisible(true);
+            }
+        });
+        notesNo.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                notesField.setVisible(false);
+            }
+        });
+
+        this.notesRadioPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        this.notesRadioPanel.add(new JLabel("Notes:"));
+        this.notesRadioPanel.add(notesYes);
+        this.notesRadioPanel.add(notesNo);
+        SpringUtilities.makeCompactGrid(this.notesRadioPanel,
+                1, 3,
+                0, 0,
+                5, 0);
 
         this.fieldPanel = new JPanel(new SpringLayout());
         this.fieldPanel.add(new JLabel("Title:"));
@@ -108,15 +151,19 @@ public class EntryDialog extends JDialog implements ActionListener {
         this.fieldPanel.add(this.repeatField);
         this.fieldPanel.add(new JLabel(""));
         this.fieldPanel.add(this.passwordButtonPanel);
+        this.fieldPanel.add(new JLabel(""));
+        this.fieldPanel.add(this.notesRadioPanel);
         SpringUtilities.makeCompactGrid(this.fieldPanel,
-                6, 2, // rows, columns
+                7, 2, // rows, columns
                 5, 5, // initX, initY
                 5, 5); // xPad, yPad
+
 
         this.notesField = TextComponentFactory.newTextArea();
         this.notesField.setFont(TextComponentFactory.newTextField().getFont());
         this.notesField.setLineWrap(true);
         this.notesField.setWrapStyleWord(true);
+        this.notesField.setVisible(false);
 
         this.notesPanel = new JPanel(new BorderLayout(5, 5));
         this.notesPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
@@ -152,8 +199,8 @@ public class EntryDialog extends JDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         if ("show_button".equals(command)) {
-            this.passwordField.setEchoChar(this.showButton.isSelected() ? NULL_ECHO : this.originalEcho);
-            this.repeatField.setEchoChar(this.showButton.isSelected() ? NULL_ECHO : this.originalEcho);
+            this.passwordField.setEchoChar(this.showCheckbox.isSelected() ? NULL_ECHO : this.originalEcho);
+            this.repeatField.setEchoChar(this.showCheckbox.isSelected() ? NULL_ECHO : this.originalEcho);
         } else if ("ok_button".equals(command)) {
             if (this.titleField.getText().trim().isEmpty()) {
                 MessageDialog.showWarningMessage(this, "Please fill the title field.");
