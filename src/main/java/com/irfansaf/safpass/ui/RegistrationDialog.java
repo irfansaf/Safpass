@@ -1,8 +1,10 @@
 package com.irfansaf.safpass.ui;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.irfansaf.safpass.model.User;
 import com.irfansaf.safpass.util.SpringUtilities;
 
 import javax.swing.*;
@@ -10,15 +12,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.List;
 
 public class RegistrationDialog  extends JDialog implements ActionListener {
 
@@ -112,6 +114,37 @@ public class RegistrationDialog  extends JDialog implements ActionListener {
             return;
         }
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        User newUser = new User(firstName, lastName, username, email, password);
+        try {
+            File file = new File("src/main/java/com/irfansaf/safpass/data/users.json");
+            System.out.println("Absolute path: " + file.getAbsolutePath());
+
+            if (!file.exists()) {
+                MessageDialog.showErrorMessage(this, "Error registering user. Please try again.");
+                return;
+            }
+            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {});
+
+            // Check if the username or email already exists
+            boolean userExists = users.stream()
+                    .anyMatch(user -> user.getEmail().equals(newUser.getEmail()) || user.getUsername().equals(newUser.getUsername()));
+            if (userExists) {
+                JOptionPane.showMessageDialog(this, "Username or email already exists. Please choose another one.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Add the new user and save the updated list to the JSON file
+            users.add(newUser);
+            objectMapper.writeValue(file, users);
+            JOptionPane.showMessageDialog(this, "Registration successful. You can now login.");
+            dispose();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error registering user. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        /**
         try {
             URL url  = new URL("http://safpass.irfansaf.com/api/register");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -163,6 +196,7 @@ public class RegistrationDialog  extends JDialog implements ActionListener {
             LOG.log(Level.SEVERE, "Error registering user. Please try again.");
             MessageDialog.showErrorMessage(this,"Error registering user. Please try again");
         }
+         */
     }
 
 

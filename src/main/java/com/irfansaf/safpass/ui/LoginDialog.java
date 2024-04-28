@@ -1,20 +1,24 @@
 package com.irfansaf.safpass.ui;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.irfansaf.safpass.Safpass;
 import com.irfansaf.safpass.model.User;
 import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.util.SpringUtilities;
 
 import javax.swing.*;
 import java.awt.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.prefs.Preferences;
 
 public class LoginDialog extends JDialog implements ActionListener {
@@ -113,21 +117,42 @@ public class LoginDialog extends JDialog implements ActionListener {
             return;
         }
 
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            URL url = new URL("http://safpass.irfansaf.com/api/login");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setDoOutput(true);
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-            String jsonInputString = String.format("{\"login\": \"%s\", \"password\": \"%s\"}", emailOrUsername, password);
+            File file = new File("src/main/java/com/irfansaf/safpass/data/users.json");
+            System.out.println("Absolute path: " + file.getAbsolutePath());
 
-            try (OutputStream os = connection.getOutputStream()) {
-                byte[] input = jsonInputString.getBytes("utf-8");
-                os.write(input, 0, input.length);
+            if (!file.exists()) {
+                MessageDialog.showErrorMessage(this, "User data file not found. Please register first.");
+                return;
             }
+            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {});
 
+            // Check if user credentials match
+            Optional<User> matchedUser = users.stream()
+                    .filter(user -> user.getUsername().equals(emailOrUsername) && user.getPassword().equals(password))
+                    .findFirst();
+
+            if (matchedUser.isPresent()) {
+                MessageDialog.showInformationMessage(this, "Login Success");
+                User user = matchedUser.get();
+                parentFrame.setUsername(user.getUsername());
+                parentFrame.setUserId(user.getEmail());
+
+                dispose();
+                // Proceed with the rest of the application
+            } else {
+                MessageDialog.showWarningMessage(this,"Invalid email/username or password. Please try again.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            MessageDialog.showErrorMessage(this, "Error authenticating user. Please try again.");
+        }
+
+        /**
+        try {
+            HttpURLConnection connection = getHttpURLConnection(emailOrUsername, password);
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 try (BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream(), "utf-8"))) {
@@ -163,19 +188,34 @@ public class LoginDialog extends JDialog implements ActionListener {
                         }
                     });
                 }
-            } else {
-                MessageDialog.showWarningMessage(this,"Invalid email/username or password. Please try again.");
-            }
+        } else {
+            MessageDialog.showWarningMessage(this,"Invalid email/username or password. Please try again.");
         } catch (IOException e) {
             e.printStackTrace();
-            MessageDialog.showWarningMessage(this,"Error connecting to the server. Please try again");
+            MessageDialog.showErrorMessage(this, "Error authenticating user. Please try again.");
         }
+        */
+    }
+
+    private static HttpURLConnection getHttpURLConnection(String emailOrUsername, String password) throws IOException {
+        URL url = new URL("http://safpass.irfansaf.com/api/login");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("User-Agent", "Mozilla/5.0");
+
+        String jsonInputString = String.format("{\"login\": \"%s\", \"password\": \"%s\"}", emailOrUsername, password);
+
+        try (OutputStream os = connection.getOutputStream()) {
+            byte[] input = jsonInputString.getBytes(StandardCharsets.UTF_8);
+            os.write(input, 0, input.length);
+        }
+        return connection;
     }
 
     public static boolean isPurchaseCodeValid() {
-        Preferences prefs = Preferences.userNodeForPackage(Configuration.class);
-        String purchaseCode = prefs.get(Configuration.PURCHASE_CODE_KEY, null);
-        return purchaseCode != null && !purchaseCode.isEmpty();
+        return Safpass.isPurchaseCodeValid();
     }
 
     private void showRegistrationDialog() {

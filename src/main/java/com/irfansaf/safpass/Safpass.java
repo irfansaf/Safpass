@@ -4,10 +4,8 @@ import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.irfansaf.safpass.ui.SafPassFrame;
-import com.irfansaf.safpass.ui.PurchaseCodeDialog;
 import com.irfansaf.safpass.util.Configuration;
 
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import javax.swing.JDialog;
@@ -50,14 +48,5 @@ public final class Safpass {
             LOG.log(Level.CONFIG, "Could not set look and feel for the application", e);
         }
         SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
-
-//        SwingUtilities.invokeLater(() -> {
-//            while (!isPurchaseCodeValid()) {
-//                PurchaseCodeDialog purchaseCodeDialog=  new PurchaseCodeDialog();
-//                purchaseCodeDialog.setModal(true);
-//                purchaseCodeDialog.setVisible(true);
-//            }
-//            SafPassFrame.getInstance((args.length > 0) ? args[0] : null);
-//        });
     }
 }

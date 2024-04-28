@@ -3,26 +3,16 @@ package com.irfansaf.safpass.ui;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.Buffer;
-import java.nio.charset.StandardCharsets;
+import java.io.*;
 import java.util.Optional;
-import java.util.Random;
 import java.util.prefs.BackingStoreException;
+import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import javax.swing.text.JTextComponent;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.irfansaf.safpass.model.User;
 import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.util.CryptUtils;
@@ -167,35 +157,75 @@ public class ProfileDialog extends JDialog{
 
     private void updateUserInfo(String fieldName, String newValue) {
         try {
-            URL url = new URL("http://safpass.irfansaf.com/api/users/" + userId);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("PUT");
-            connection.setRequestProperty("Authorization", "Bearer " + accessToken);
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestProperty("User-Agent", "Mozilla/5.0");
-            connection.setDoOutput(true);
+            File file = new File("src/main/java/com/irfansaf/safpass/data/users.json");
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {});
 
-            ObjectMapper mapper = new ObjectMapper();
-            ObjectNode requestBody = mapper.createObjectNode();
-            requestBody.put(fieldName, newValue);
+            // Find the user with the matching username
+            Optional<User> userOptional = users.stream()
+                    .filter(user -> user.getUsername().equals(parentFrame.getUsername())) // Assuming parentFrame has a method to get the username
+                    .findFirst();
 
-            try (OutputStream outputStream = connection.getOutputStream()) {
-                outputStream.write(requestBody.toString().getBytes(StandardCharsets.UTF_8));
-                outputStream.flush();
-            }
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                // Update the field with the new value
+                if (fieldName.equals("username")) {
+                    user.setUsername(newValue);
+                } else if (fieldName.equals("first_name")) {
+                    String[] nameParts = newValue.split("\\s", 2);
+                    user.setFirstName(nameParts[0]);
+                    user.setLastName(nameParts.length > 1 ? nameParts[1] : "");
+                } else if (fieldName.equals("last_name")) {
+                    String[] nameParts = newValue.split("\\s", 2);
+                    user.setFirstName(nameParts[0]);
+                    user.setLastName(nameParts.length > 1 ? nameParts[1] : "");
+                } else if (fieldName.equals("email")) {
+                    user.setEmail(newValue);
+                } else if (fieldName.equals("password")) {
+                    user.setPassword(newValue);
+                }
 
-            int responseCode = connection.getResponseCode();
-            if (responseCode == HttpURLConnection.HTTP_OK) {
-                MessageDialog.showInformationMessage(this, "User information updated successfully");
+                // Save the updated user information
+                objectMapper.writeValue(file, users);
+                MessageDialog.showInformationMessage(this, "User information updated successfully.");
             } else {
-                MessageDialog.showWarningMessage(this, "Error updating user information. Please try again.");
+                MessageDialog.showWarningMessage(this, "Error Fetching user information. User not found.");
             }
         } catch (IOException e) {
             e.printStackTrace();
-            MessageDialog.showErrorMessage(this, "Error updating user information. Error details: " + e.getMessage());
+            MessageDialog.showWarningMessage(this, "Error Fetching user information.");
         }
     }
 
+    private void fetchUserInfo() {
+        try {
+            File file = new File("src/main/java/com/irfansaf/safpass/data/users.json");
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<User> users = objectMapper.readValue(file, new TypeReference<List<User>>() {});
+
+            // Find the user with the matching username
+            Optional<User> userOptional = users.stream()
+                    .filter(user -> user.getUsername().equals(parentFrame.getUsername())) // Assuming parentFrame has a method to get the username
+                    .findFirst();
+
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                // Populate the fields with the fetched user information
+                usernameField.setText(user.getUsername());
+                nameField.setText(user.getFirstName() + " " + user.getLastName());
+                emailField.setText(user.getEmail());
+                // You may choose to handle password display differently based on your requirements
+                // passwordField.setText(""); // Clear password field
+            } else {
+                MessageDialog.showWarningMessage(this, "Error Fetching user information. User not found.");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            MessageDialog.showWarningMessage(this, "Error Fetching user information.");
+        }
+    }
+
+    /**
     private void fetchUserInfo() {
         String accessToken = parentFrame.getAccessToken();
         String userId = parentFrame.getUserId();
@@ -244,6 +274,7 @@ public class ProfileDialog extends JDialog{
             MessageDialog.showWarningMessage(this, "Error Fetching user information.");
         }
     }
+    */
 
     private void toggleEditable(JTextComponent textField, JButton editButton) {
         textField.setEditable(!textField.isEditable());

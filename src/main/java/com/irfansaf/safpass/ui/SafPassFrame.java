@@ -8,17 +8,13 @@ import com.irfansaf.safpass.ui.helper.EntryHelper;
 import com.irfansaf.safpass.ui.helper.FileHelper;
 import com.irfansaf.safpass.util.Configuration;
 import com.irfansaf.safpass.xml.bind.Entry;
-//import com.irfansaf.safpass.ui.
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -38,6 +34,7 @@ public final class SafPassFrame extends JFrame {
     private static SafPassFrame instance;
     private String accessToken;
     private String userId;
+    private String username;
     private User user;
     private ProfileDialog profileDialog;
 
@@ -68,7 +65,7 @@ public final class SafPassFrame extends JFrame {
 
         try {
             setIconImages(Stream.of(16, 20, 32, 40, 64, 80, 128, 160)
-                    .map(size -> getIcon("safpass", size, size).getImage())
+                    .map(size -> Objects.requireNonNull(getIcon("safpass", size, size)).getImage())
                     .collect(Collectors.toList()));
         } catch (Exception e) {
             LOG.log(Level.CONFIG, "Could not set application icon.", e);
@@ -203,6 +200,14 @@ public final class SafPassFrame extends JFrame {
     }
     public User getUser() {
         return user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setUser(User user) {
